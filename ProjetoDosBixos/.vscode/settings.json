@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "i2c_slave.h": "c",
+        "esp_log.h": "c"
+    }
+}
