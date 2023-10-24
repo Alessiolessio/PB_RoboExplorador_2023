@@ -4,6 +4,7 @@
         "gpio.h": "c",
         "freertos.h": "c",
         "task.h": "c",
-        "pid_ctrl.h": "c"
+        "pid_ctrl.h": "c",
+        "stdio.h": "c"
     }
 }
