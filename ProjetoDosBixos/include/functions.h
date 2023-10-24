@@ -82,7 +82,7 @@
 
 
         /**
-         * @brief This is the main function. It calculates an error based on the difference current velocity value and the goal one. Then it calculates the output for both right and left motors PWMs.
+         * @brief This is the main function. It calculates an error based on the difference between current velocity value and the goal one. Then it calculates the output for both right and left motors PWMs.
          * 
          * @param[in] pid_block PID configuration values. 
          * @param[in] velocity_goal_1 The velocity expected by the ROS input for motor_1. 
