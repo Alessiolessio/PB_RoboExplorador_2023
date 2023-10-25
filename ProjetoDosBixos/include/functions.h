@@ -6,10 +6,22 @@
     #include <stdlib.h>
     #include <math.h>
     #include "pid_ctrl.h"
+    //#include "rotary_encoder.h"
     #include "driver/gpio.h"
     #include "freertos/FreeRTOS.h"
     #include "freertos/task.h"
     #include "driver/ledc.h"
+
+    /**
+     * @brief This struct integrates the GPIOs and the PWM ports to easly pass then to the update_motor function
+    */
+    typedef struct motor_information MOTOR;
+    struct motor_information{
+        int gpio_1;
+        int gpio_2;
+        int pwm_channel;
+        };
+    
 
     /**
      * @name Types & Constants
@@ -29,8 +41,8 @@
         #define LEDC_MODE               LEDC_HIGH_SPEED_MODE
         #define LEDC_OUTPUT_IO_1        (18) // Define the output GPIO for PWM
         #define LEDC_OUTPUT_IO_2        (19) // Define the output GPIO for PWM
-        #define LEDC_CHANNEL_1           LEDC_CHANNEL_0
-        #define LEDC_CHANNEL_2           LEDC_CHANNEL_1
+        #define LEFT_CHANNEL           LEDC_CHANNEL_0
+        #define RIGHT_CHANNEL          LEDC_CHANNEL_1
         #define LEDC_DUTY_RES            LEDC_TIMER_13_BIT 
         #define LEDC_DUTY               (4096) 
         #define LEDC_FREQUENCY          (5000) 
@@ -39,9 +51,12 @@
      * @brief Definition of PID parameters.
     */
 
-        #define KI 5 //Integrativo (Soma o estado anterior para auxliar o crescimento de convergência)
-        #define KD 5 //Derivativo (Caso a velocidade inicie seu declínio, a derivada do gráfico de V se torna negativa - decrescente - e os valores somados por KD auxiliam nessa queda)
-        #define KP 3 //Proporcional (Determina o grau de crescimento do meu parâmetro desejado - Velocidade)
+        #define KI_1 5 //Integrativo (Soma o estado anterior para auxliar o crescimento de convergência)
+        #define KD_1 5 //Derivativo (Caso a velocidade inicie seu declínio, a derivada do gráfico de V se torna negativa - decrescente - e os valores somados por KD auxiliam nessa queda)
+        #define KP_1 3 //Proporcional (Determina o grau de crescimento do meu parâmetro desejado - Velocidade)
+        #define KI_2 5
+        #define KP_2 5
+        #define KD_2 5
         #define Max_Output 500
         #define Min_Output 1
         #define Max_integral 200
@@ -77,8 +92,7 @@
          * @details Setpoint is given by ROS and each motor has one individual value.
          * @return ESP_OK.
         */
-        esp_err_t motor_update_right(float control_motor);
-        esp_err_t motor_update_left(float control_motor);
+        esp_err_t motor_update(float control_motor, MOTOR* ports);
 
 
         /**
@@ -90,7 +104,7 @@
          * @details The setpoints values (velocity) are given by ROS. 
          * @return ESP_OK.
         */
-        esp_err_t pid_calculate(pid_ctrl_block_handle_t pid_block, float velocity_goal_1, float velocity_goal_2);
+        esp_err_t pid_calculate(void);
     /**
      * @}
     */
