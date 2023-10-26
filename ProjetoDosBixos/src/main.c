@@ -2,5 +2,6 @@
 
 void app_main() {
     init_param();
-    pid_calculate();
+    pcnt_unit_handle_t unit = init_pin_encoder();
+    pid_calculate(unit);
 }

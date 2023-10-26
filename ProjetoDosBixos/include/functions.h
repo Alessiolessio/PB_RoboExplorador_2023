@@ -6,33 +6,31 @@
     #include <stdlib.h>
     #include <math.h>
     #include "pid_ctrl.h"
-    //#include "rotary_encoder.h"
     #include "driver/gpio.h"
     #include "freertos/FreeRTOS.h"
     #include "freertos/task.h"
+    #include "freertos/queue.h"
     #include "driver/ledc.h"
+    #include "driver/pulse_cnt.h"
 
     /**
      * @brief This struct integrates the GPIOs and the PWM ports to easly pass then to the update_motor function
     */
     typedef struct motor_information MOTOR;
     struct motor_information{
-        int gpio_1;
-        int gpio_2;
+        gpio_num_t gpio_1;
+        gpio_num_t gpio_2;
         int pwm_channel;
         };
-    
 
     /**
-     * @name Types & Constants
-     * @{
-     * 
-     * @brief Definitions of the motors ports.
+     *  @brief This struct integrates the GPIOs and the count value for each encoder 
     */
-        #define PIO_NUM_2 Motor_1A
-        #define PIO_NUM_4 Motor_1B
-        #define PIO_NUM_26 Motor_2A
-        #define PIO_NUM_27 Motor_2B
+    typedef struct {
+        gpio_num_t  pin_a;    
+        gpio_num_t pin_b;   
+        int counter;               
+    }rotary_encoder_config_t;  
 
     /**
      * @brief Definitions of PWM parameters.
@@ -62,6 +60,17 @@
         #define Max_integral 200
         #define Min_integral 1
 
+
+    /**
+     * @brief Definition of Encoder parameters.
+    */
+        #define PCNT_HIGH_LIMIT 100
+        #define PCNT_LOW_LIMIT  -100
+        #define LEFT_ENCODER_1 GPIO_NUM_16
+        #define LEFT_ENCODER_2 GPIO_NUM_17
+        #define RIGHT_ENCODER_1 GPIO_NUM_14
+        #define RIGHT_ENCODER_2 GPIO_NUM_15
+
     /**
      * @}
     */
@@ -71,11 +80,19 @@
      * @{
         */
         /**
-         * @brief This function is responsible to initialize every pin used in the program.
+         * @brief This functions are responsible to initialize every pin used in the program.
          * @param Void.
+         * @details the function "init_pin_encoder" calls the function "init encoder" and returns the unit that will be used latter"
          * @return ESP_OK.
         */
         esp_err_t init_param(void);
+        //{
+            esp_err_t init_gpio(void);
+            esp_err_t init_pwm(void);
+            esp_err_t init_pid(void);
+            pcnt_unit_handle_t init_pin_encoder(void);
+            esp_err_t init_encoder(const rotary_encoder_config_t *config, pcnt_unit_handle_t pcnt_unit);
+        //}
 
         /**
          * @brief This function calculate the current velocity 
@@ -84,7 +101,14 @@
          * @param Void.  
          * @return Current_velocity.
         */
-        float angular_velocity(void);//Nao feita ainda
+        float angular_velocity(pcnt_unit_handle_t upcnt_unit);
+
+        /**
+         * @brief
+         * @param
+         * @return
+        */
+        static bool example_pcnt_on_reach(pcnt_unit_handle_t unit, const pcnt_watch_event_data_t *edata, void *user_ctx);
 
         /**
          * @brief This functions receive a value from the PID logic and update the PWM and the respective motor rotation direction.
@@ -98,13 +122,11 @@
         /**
          * @brief This is the main function. It calculates an error based on the difference between current velocity value and the goal one. Then it calculates the output for both right and left motors PWMs.
          * 
-         * @param[in] pid_block PID configuration values. 
-         * @param[in] velocity_goal_1 The velocity expected by the ROS input for motor_1. 
-         * @param[in] velocity_goal_2 The velocity expected by the ROS input for motor_2. 
+         * @param[in] pcnt_unit_handle_t Encoder configuration values. 
          * @details The setpoints values (velocity) are given by ROS. 
          * @return ESP_OK.
         */
-        esp_err_t pid_calculate(void);
+        esp_err_t pid_calculate(pcnt_unit_handle_t upcnt_unit);
     /**
      * @}
     */
