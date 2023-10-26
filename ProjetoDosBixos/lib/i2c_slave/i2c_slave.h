@@ -1,3 +1,6 @@
+#ifndef __I2CSLAVE__
+#define __I2CSLAVE__
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -19,13 +22,13 @@
 // Definição dos valores realmente utilizados na escrita e leitura
 #define WRITE_LEN_VALUE 4
 #define READ_LEN_VALUE 6
-#define TIMEOUT_MS 1000
+#define TIMEOUT_MS 250 // Tentar mudar isso
 
 // Definição de valores para empacotamento de desempacotamento
 #define LAST_BYTE_MASK 0xFF
 
 // Definição de frequências utilizadas dentro das tasks
-#define FREQ_COMMUNICATION 1000
+#define FREQ_COMMUNICATION 58
 #define FREQ_CONTROL 2000
 
 static QueueHandle_t i2c_write_queue = NULL; 
@@ -103,7 +106,7 @@ static void i2c_task_controle(void *pvParameters);
  *     - ESP_OK: As tarefas foram criadas com sucesso.
  *     - Outros códigos de erro em caso de falha.
  */
-static esp_err_t create_tasks(int parametros, int display);
+esp_err_t create_tasks(int parametros, int display);
 
 /**
  * @brief Exibe dados em formato hexadecimal
@@ -115,3 +118,4 @@ static esp_err_t create_tasks(int parametros, int display);
  */
 static void display_data(uint8_t *data, int len);
 
+#endif

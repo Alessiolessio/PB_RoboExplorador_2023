@@ -1,6 +1,7 @@
 #include "i2c_slave.h"
 
 int valor = 0; // GLobal variable for testing communincation intercores
+int valor_lido = 0;
 
 static esp_err_t i2c_slave_init(void) {
     
@@ -39,7 +40,6 @@ static int i2c_read_task(void *params) {
     } 
 
     if (size > 0) {
-        valor = x;
         return x;
 
     } else {
@@ -69,8 +69,6 @@ static void i2c_write_task(void *params, int value) {
 
 static void i2c_task_com(void *params) {
 
-    int valor_lido = 0;
-
     while(1){
 
         vTaskDelay(FREQ_COMMUNICATION / portTICK_PERIOD_MS);
@@ -79,7 +77,7 @@ static void i2c_task_com(void *params) {
 
         vTaskDelay(FREQ_COMMUNICATION / portTICK_PERIOD_MS);
 
-        i2c_write_task(params, valor_lido);
+        i2c_write_task(params, valor);
 
     }
 
@@ -89,16 +87,17 @@ static void i2c_task_controle(void *params) {
 
     while(1){
 
-        // Implementar baixo nível do controle
-        ESP_LOGI(TAG, "Task 2:  %d\n", valor);
-
         vTaskDelay(FREQ_CONTROL / portTICK_PERIOD_MS);
+
+        valor++;
+
+        printf("Valor lido: %d \n", valor_lido);
 
     }
 
 }
 
-static esp_err_t create_tasks(int parametros, int display) {
+esp_err_t create_tasks(int parametros, int display) {
 
     ESP_ERROR_CHECK(i2c_slave_init());
 
@@ -124,5 +123,4 @@ static void display_data(uint8_t *data, int len) {
     }
     printf("\n");
 }
-
 
