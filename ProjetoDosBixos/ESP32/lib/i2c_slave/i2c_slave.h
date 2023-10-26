@@ -1,6 +1,16 @@
 #ifndef __I2CSLAVE__
 #define __I2CSLAVE__
 
+/**
+ * @brief Código para comunicação I2C em modo escravo.
+ * 
+ * Autores: Matheus Paiva Angarola e William Noboru Yoshihara 
+ * 
+ * Este código configura e inicia o barramento I2C em modo escravo para comunicação
+ * com um mestre. Ele lê e escreve dados no barramento I2C, desempacota e empacota valores.
+ * O código cria tarefas para leitura e escrita de dados e também para funções de control.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -22,7 +32,7 @@
 // Definição dos valores realmente utilizados na escrita e leitura
 #define WRITE_LEN_VALUE 4
 #define READ_LEN_VALUE 6
-#define TIMEOUT_MS 250 // Tentar mudar isso
+#define TIMEOUT_MS 250 
 
 // Definição de valores para empacotamento de desempacotamento
 #define LAST_BYTE_MASK 0xFF

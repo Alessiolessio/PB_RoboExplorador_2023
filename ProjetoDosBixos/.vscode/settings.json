@@ -2,7 +2,8 @@
     "files.associations": {
         "i2c_slave.h": "c",
         "esp_log.h": "c",
-        "i2c.h": "c"
+        "i2c.h": "c",
+        "gpio.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
