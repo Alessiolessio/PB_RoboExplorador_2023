@@ -38,7 +38,7 @@ class I2CCommunication:
     def write_data(self, value):
 
         try:
-            # "Empacota" o valor mandado com parâmetro da função
+            # "Empacota" o valor mandado como parâmetro da função
             data = struct.pack('!i', value)
            # print(f'Valor enviado: {data}')
             print(f'Valor enviado: {value}')
