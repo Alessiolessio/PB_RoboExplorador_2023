@@ -4,7 +4,7 @@
 
 Motor Direita: GPIO_NUM_2 && GPIO_NUM_4;
 Encoder Direita: GPIO_NUM_14 && GPIO_NUM_15;
-Motor Esquerda: GPIO_NUM_26 && GPIO_NUM_27;
+Motor Esquerda: GPIO_NUM_19 && GPIO_NUM_21;
 Encoder Esquerda: GPIO_NUM_16 && GPIO_NUM_17;
 
 */
@@ -13,10 +13,26 @@ Encoder Esquerda: GPIO_NUM_16 && GPIO_NUM_17;
  * @brief Definition of global variables
  * @details 
 */
-MOTOR RIGHT_MOTOR, LEFT_MOTOR;
+
+static const char *TAG = "Testing angular velocity";
+
+motor LEFT_MOTOR_INFORMATION = {
+  .gpio_1      = GPIO_NUM_21,
+  .gpio_2      = GPIO_NUM_19,
+  .pwm_channel = LEFT_CHANNEL
+};
+motor RIGHT_MOTOR_INFORMATION = {
+  .gpio_1      = GPIO_NUM_2,
+  .gpio_2      = GPIO_NUM_4,
+  .pwm_channel = RIGHT_CHANNEL
+};
 pid_ctrl_block_handle_t B1; 
 pid_ctrl_block_handle_t B2; 
-int watch_points[] = {PCNT_LOW_LIMIT, -50, 0, 50, PCNT_HIGH_LIMIT};
+int pulse_count = 0;
+int event_count = 0;
+float current_velocity = 0;
+QueueHandle_t queue;
+
 
 esp_err_t init_param(){
     init_gpio();
@@ -28,20 +44,13 @@ esp_err_t init_param(){
 esp_err_t init_gpio(){
     gpio_set_direction(GPIO_NUM_2, GPIO_MODE_OUTPUT);
     gpio_set_direction(GPIO_NUM_4, GPIO_MODE_OUTPUT);
-    gpio_set_direction(GPIO_NUM_26, GPIO_MODE_OUTPUT);
-    gpio_set_direction(GPIO_NUM_27, GPIO_MODE_OUTPUT);
+    gpio_set_direction(GPIO_NUM_34, GPIO_MODE_OUTPUT);
+    gpio_set_direction(GPIO_NUM_35, GPIO_MODE_OUTPUT);
 
     gpio_set_direction(LEFT_ENCODER_1, GPIO_MODE_INPUT);
     gpio_set_direction(LEFT_ENCODER_2, GPIO_MODE_INPUT);
     gpio_set_direction(RIGHT_ENCODER_1, GPIO_MODE_INPUT);
     gpio_set_direction(RIGHT_ENCODER_2, GPIO_MODE_INPUT);
-
-    RIGHT_MOTOR.gpio_1 = GPIO_NUM_2;
-    RIGHT_MOTOR.gpio_2 = GPIO_NUM_4;
-    RIGHT_MOTOR.pwm_channel = RIGHT_CHANNEL;
-    LEFT_MOTOR.gpio_1 = GPIO_NUM_26;
-    LEFT_MOTOR.gpio_2 = GPIO_NUM_27;
-    LEFT_MOTOR.pwm_channel = LEFT_CHANNEL;
     return ESP_OK;
 }
 
@@ -117,60 +126,90 @@ esp_err_t init_pid(){
     return ESP_OK;
 }
 
-pcnt_unit_handle_t init_pin_encoder(){
-//Attatching encoder GPIO pins.
-  const rotary_encoder_config_t left_encoder_pins = {
-    .counter = 0,
-    .pin_a = LEFT_ENCODER_1,
-    .pin_b = LEFT_ENCODER_2,
-  };
-  const rotary_encoder_config_t right_encoder_pins = {
-    .counter = 0,
-    .pin_a = RIGHT_ENCODER_1,
-    .pin_b = RIGHT_ENCODER_2,
-  };
+pcnt_unit_handle_t init_encoder(){
+  //Attatching encoder GPIO pins.
+  //DANDO DEFINED BUT NOT USED
+    /*const rotary_encoder_config_t left_encoder_pins = {
+      .pin_a = LEFT_ENCODER_1,
+      .pin_b = LEFT_ENCODER_2,
+    };
+    const rotary_encoder_config_t right_encoder_pins = {
+      .pin_a = RIGHT_ENCODER_1,
+      .pin_b = RIGHT_ENCODER_2,
+    };*/
 
-//Creating the unit and setting up the glitch filter.
-  pcnt_unit_config_t unit_config = {
-      .high_limit = PCNT_HIGH_LIMIT,
-      .low_limit = PCNT_LOW_LIMIT,
-  };
-  pcnt_unit_handle_t pcnt_unit = NULL;
-  pcnt_new_unit(&unit_config, &pcnt_unit);
+    pcnt_unit_config_t unit_config = {
+        .high_limit = PCNT_HIGH_LIMIT,
+        .low_limit = PCNT_LOW_LIMIT,
+    };
+    pcnt_unit_handle_t pcnt_unit = NULL;
+    ESP_ERROR_CHECK(pcnt_new_unit(&unit_config, &pcnt_unit));
 
-  pcnt_glitch_filter_config_t filter_config = {
-      .max_glitch_ns = 100,
-  };
-  pcnt_unit_set_glitch_filter(pcnt_unit, &filter_config);
+    ESP_LOGI(TAG, "set glitch filter");
+    pcnt_glitch_filter_config_t filter_config = {
+        .max_glitch_ns = 1000,
+    };
+    ESP_ERROR_CHECK(pcnt_unit_set_glitch_filter(pcnt_unit, &filter_config));
 
-  //Avoiding code repetition pid_compute in pid_calculate.
-  init_encoder(&right_encoder_pins, pcnt_unit);
-  init_encoder(&left_encoder_pins, pcnt_unit);
-  //Add the Watching points used for count the rotations
-  for (size_t i = 0; i < sizeof(watch_points) / sizeof(watch_points[0]); i++) { // esse for tava como o erro dentro, acredito q ainda seja coisa de debugar, mas vou ver dps
-    ESP_ERROR_CHECK(pcnt_unit_add_watch_point(pcnt_unit, watch_points[i]));
-    }
-
-  return pcnt_unit;
-}
-
-//DUVIDA: MESMO QUE, AO CHAMAR A FUNÇÃO UMA SEGUNDA VEZ A POSIÇÃO NA MEMORIA DAS VARIAVEIS CANAL 1 E 2 SEJAM DIFERENTES DA PRIMEIRA CHAMADA, CHAMAR PCNT DNV NAO "SUBSTITUIRIA" A CONFIGURAÇÃO DOS CANAIS DO ENCODER DIREITO?
-esp_err_t init_encoder(const rotary_encoder_config_t *config, pcnt_unit_handle_t pcnt_unit){
+    ESP_LOGI(TAG, "install pcnt channels");
     pcnt_chan_config_t chan_a_config = {
-        .edge_gpio_num = config->pin_a,
-        .level_gpio_num = config->pin_b,
+        .edge_gpio_num  = LEFT_ENCODER_1,
+        .level_gpio_num = LEFT_ENCODER_2,
     };
     pcnt_channel_handle_t pcnt_chan_a = NULL;
-    pcnt_new_channel(pcnt_unit, &chan_a_config, &pcnt_chan_a);
+    ESP_ERROR_CHECK(pcnt_new_channel(pcnt_unit, &chan_a_config, &pcnt_chan_a));
     pcnt_chan_config_t chan_b_config = {
-        .edge_gpio_num = config->pin_b,
-        .level_gpio_num = config->pin_a,
+        .edge_gpio_num = LEFT_ENCODER_2,
+        .level_gpio_num = LEFT_ENCODER_1,
     };
     pcnt_channel_handle_t pcnt_chan_b = NULL;
-    pcnt_new_channel(pcnt_unit, &chan_b_config, &pcnt_chan_b);
+    ESP_ERROR_CHECK(pcnt_new_channel(pcnt_unit, &chan_b_config, &pcnt_chan_b));
 
-    return ESP_OK;
+    pcnt_chan_config_t chan_c_config = {
+        .edge_gpio_num  = RIGHT_ENCODER_1,
+        .level_gpio_num = RIGHT_ENCODER_2,
+    };
+    pcnt_channel_handle_t pcnt_chan_c = NULL;
+    ESP_ERROR_CHECK(pcnt_new_channel(pcnt_unit, &chan_c_config, &pcnt_chan_c));
+    pcnt_chan_config_t chan_d_config = {
+        .edge_gpio_num = RIGHT_ENCODER_2,
+        .level_gpio_num = RIGHT_ENCODER_1,
+    };
+    pcnt_channel_handle_t pcnt_chan_d = NULL;
+    ESP_ERROR_CHECK(pcnt_new_channel(pcnt_unit, &chan_d_config, &pcnt_chan_d));
+
+    ESP_LOGI(TAG, "set edge and level actions for pcnt channels");
+    ESP_ERROR_CHECK(pcnt_channel_set_edge_action(pcnt_chan_a, PCNT_CHANNEL_EDGE_ACTION_DECREASE, PCNT_CHANNEL_EDGE_ACTION_INCREASE));
+    ESP_ERROR_CHECK(pcnt_channel_set_level_action(pcnt_chan_a, PCNT_CHANNEL_LEVEL_ACTION_KEEP, PCNT_CHANNEL_LEVEL_ACTION_INVERSE));
+    ESP_ERROR_CHECK(pcnt_channel_set_edge_action(pcnt_chan_b, PCNT_CHANNEL_EDGE_ACTION_INCREASE, PCNT_CHANNEL_EDGE_ACTION_DECREASE));
+    ESP_ERROR_CHECK(pcnt_channel_set_level_action(pcnt_chan_b, PCNT_CHANNEL_LEVEL_ACTION_KEEP, PCNT_CHANNEL_LEVEL_ACTION_INVERSE));
+    ESP_ERROR_CHECK(pcnt_channel_set_edge_action(pcnt_chan_c, PCNT_CHANNEL_EDGE_ACTION_DECREASE, PCNT_CHANNEL_EDGE_ACTION_INCREASE));
+    ESP_ERROR_CHECK(pcnt_channel_set_level_action(pcnt_chan_c, PCNT_CHANNEL_LEVEL_ACTION_KEEP, PCNT_CHANNEL_LEVEL_ACTION_INVERSE));
+    ESP_ERROR_CHECK(pcnt_channel_set_edge_action(pcnt_chan_d, PCNT_CHANNEL_EDGE_ACTION_INCREASE, PCNT_CHANNEL_EDGE_ACTION_DECREASE));
+    ESP_ERROR_CHECK(pcnt_channel_set_level_action(pcnt_chan_d, PCNT_CHANNEL_LEVEL_ACTION_KEEP, PCNT_CHANNEL_LEVEL_ACTION_INVERSE));
+
+    ESP_LOGI(TAG, "add watch points and register callbacks");
+    int watch_points[] = {PCNT_LOW_LIMIT, -50, 0, 50, PCNT_HIGH_LIMIT};
+    for (size_t i = 0; i < sizeof(watch_points) / sizeof(watch_points[0]); i++) {
+        ESP_ERROR_CHECK(pcnt_unit_add_watch_point(pcnt_unit, watch_points[i]));
     }
+    pcnt_event_callbacks_t cbs = {
+        .on_reach = example_pcnt_on_reach,
+    };
+    QueueHandle_t queue = xQueueCreate(15, sizeof(int));
+    ESP_ERROR_CHECK(pcnt_unit_register_event_callbacks(pcnt_unit, &cbs, queue));
+
+    ESP_LOGI(TAG, "enable pcnt unit");
+    ESP_ERROR_CHECK(pcnt_unit_enable(pcnt_unit));
+    ESP_LOGI(TAG, "clear pcnt unit");
+    ESP_ERROR_CHECK(pcnt_unit_clear_count(pcnt_unit));
+    ESP_LOGI(TAG, "start pcnt unit");
+    ESP_ERROR_CHECK(pcnt_unit_start(pcnt_unit));
+
+    ESP_ERROR_CHECK(gpio_wakeup_enable(LEFT_ENCODER_1, GPIO_INTR_LOW_LEVEL));
+    ESP_ERROR_CHECK(gpio_wakeup_enable(RIGHT_ENCODER_1, GPIO_INTR_LOW_LEVEL));
+  return pcnt_unit;
+}
 
   static bool example_pcnt_on_reach(pcnt_unit_handle_t unit, const pcnt_watch_event_data_t *edata, void *user_ctx){
     BaseType_t high_task_wakeup; // 
@@ -181,42 +220,36 @@ esp_err_t init_encoder(const rotary_encoder_config_t *config, pcnt_unit_handle_t
   }
   
   float angular_velocity(pcnt_unit_handle_t pcnt_unit){
-    float current_velocity = 0;
-
-    pcnt_event_callbacks_t cbs = {
-        .on_reach = example_pcnt_on_reach, // quando um ponto é atingido ele retirna a função "example_pcnt_on_reach"
-    };
-    QueueHandle_t queue = xQueueCreate(10, sizeof(int));  
-    int pulse_count = 0;
-    int event_count = 0;
-    while (1) {
-        if (xQueueReceive(queue, &event_count, pdMS_TO_TICKS(100))) {
-            //printf("watch point counter: %d\n", event_count);
-        } else {
-            ESP_ERROR_CHECK(pcnt_unit_get_count(pcnt_unit, &pulse_count));
-            printf("Pulse count: %d\n", pulse_count);
-        }
+    if (xQueueReceive(queue, &event_count, pdMS_TO_TICKS(100))) {
+        printf("watch point counter: %d\n", event_count);
+    } else {
+        ESP_ERROR_CHECK(pcnt_unit_get_count(pcnt_unit, &pulse_count));
+        printf("Pulse count: %d\n", pulse_count);
     }
-
+    current_velocity = pulse_count;
     printf("A velocidade atual é: %f\n", current_velocity);
+    //Reset pulsecount
+    if(pulse_count == PCNT_HIGH_LIMIT || pulse_count == PCNT_LOW_LIMIT){
+      pcnt_unit_clear_count(pcnt_unit);
+    }
     return current_velocity;
 }
 
-esp_err_t motor_update(float control_motor, MOTOR* ports){
+esp_err_t motor_update(float control_motor, gpio_num_t GPIO1, gpio_num_t GPIO2, int pwm_channel){
   if (control_motor > 0){
-    gpio_set_level(ports->gpio_1, 1);
-    gpio_set_level(ports->gpio_2, 0);
+    gpio_set_level(GPIO1, 1);
+    gpio_set_level(GPIO2, 0);
   }
   else if (control_motor < 0){
-    gpio_set_level(ports->gpio_1, 0);
-    gpio_set_level(ports->gpio_2, 1);
+    gpio_set_level(GPIO1, 0);
+    gpio_set_level(GPIO2, 1);
   }
   else{
-    gpio_set_level(ports->gpio_1, 0);
-    gpio_set_level(ports->gpio_2, 0);
+    gpio_set_level(GPIO1, 0);
+    gpio_set_level(GPIO2, 0);
   }
-  ledc_set_duty(LEDC_MODE, ports->pwm_channel, control_motor);
-  ledc_update_duty(LEDC_MODE, ports->pwm_channel);
+  ledc_set_duty(LEDC_MODE, pwm_channel, control_motor);
+  ledc_update_duty(LEDC_MODE, pwm_channel);
   return ESP_OK;
 }
 
@@ -232,20 +265,21 @@ esp_err_t pid_calculate(pcnt_unit_handle_t upcnt_unit){
   float *controll_1 = NULL, *controll_2 = NULL;
 
  while(target_1 != -1 && target_2 != -1){ //Definindo um valor de parada (recebido pelo ROS))
-    for(;count < 20; count++){
+    for(;count < 10; count++){
       pid_compute(B1, error_motor_1, controll_1);
-      motor_update(*controll_1, &RIGHT_MOTOR);
+      motor_update(*controll_1, GPIO_NUM_19, GPIO_NUM_21, LEDC_CHANNEL_1);
       pid_compute(B2, error_motor_2, controll_2);
-      motor_update(*controll_2, &LEFT_MOTOR);
+      motor_update(*controll_2, GPIO_NUM_19, GPIO_NUM_21, LEDC_CHANNEL_1);
 
       current_velocity_1 = angular_velocity(upcnt_unit);
       current_velocity_2 = angular_velocity(upcnt_unit);
       error_motor_1 = (target_1 - current_velocity_1);
       error_motor_2 = (target_2 - current_velocity_2);
-      vTaskDelay(100 / portTICK_PERIOD_MS);
+      vTaskDelay(50 / portTICK_PERIOD_MS);
       }
       count = 0;
-      //FUNÇAO GET target
+      target_1 = 20;
+      target_2 = 20;
     }
     return ESP_OK;
   }

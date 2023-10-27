@@ -12,11 +12,12 @@
     #include "freertos/queue.h"
     #include "driver/ledc.h"
     #include "driver/pulse_cnt.h"
+    #include "esp_log.h"
 
     /**
      * @brief This struct integrates the GPIOs and the PWM ports to easly pass then to the update_motor function
     */
-    typedef struct motor_information MOTOR;
+    typedef struct motor_information motor;
     struct motor_information{
         gpio_num_t gpio_1;
         gpio_num_t gpio_2;
@@ -28,8 +29,7 @@
     */
     typedef struct {
         gpio_num_t  pin_a;    
-        gpio_num_t pin_b;   
-        int counter;               
+        gpio_num_t pin_b;                 
     }rotary_encoder_config_t;  
 
     /**
@@ -39,8 +39,8 @@
         #define LEDC_MODE               LEDC_HIGH_SPEED_MODE
         #define LEDC_OUTPUT_IO_1        (18) // Define the output GPIO for PWM
         #define LEDC_OUTPUT_IO_2        (19) // Define the output GPIO for PWM
-        #define LEFT_CHANNEL           LEDC_CHANNEL_0
-        #define RIGHT_CHANNEL          LEDC_CHANNEL_1
+        #define LEFT_CHANNEL           LEDC_CHANNEL_1
+        #define RIGHT_CHANNEL          LEDC_CHANNEL_0
         #define LEDC_DUTY_RES            LEDC_TIMER_13_BIT 
         #define LEDC_DUTY               (4096) 
         #define LEDC_FREQUENCY          (5000) 
@@ -66,10 +66,10 @@
     */
         #define PCNT_HIGH_LIMIT 100
         #define PCNT_LOW_LIMIT  -100
-        #define LEFT_ENCODER_1 GPIO_NUM_16
-        #define LEFT_ENCODER_2 GPIO_NUM_17
-        #define RIGHT_ENCODER_1 GPIO_NUM_14
-        #define RIGHT_ENCODER_2 GPIO_NUM_15
+        #define LEFT_ENCODER_1 GPIO_NUM_25
+        #define LEFT_ENCODER_2 GPIO_NUM_27
+        #define RIGHT_ENCODER_1 GPIO_NUM_25
+        #define RIGHT_ENCODER_2 GPIO_NUM_27
 
     /**
      * @}
@@ -90,8 +90,7 @@
             esp_err_t init_gpio(void);
             esp_err_t init_pwm(void);
             esp_err_t init_pid(void);
-            pcnt_unit_handle_t init_pin_encoder(void);
-            esp_err_t init_encoder(const rotary_encoder_config_t *config, pcnt_unit_handle_t pcnt_unit);
+            pcnt_unit_handle_t init_encoder(void);
         //}
 
         /**
@@ -116,7 +115,7 @@
          * @details Setpoint is given by ROS and each motor has one individual value.
          * @return ESP_OK.
         */
-        esp_err_t motor_update(float control_motor, MOTOR* ports);
+        esp_err_t motor_update(float control_motor, gpio_num_t GPIO1, gpio_num_t GPIO2, int pwm_channel);
 
 
         /**
