@@ -5,6 +5,11 @@
         "freertos.h": "c",
         "task.h": "c",
         "pid_ctrl.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "h_brigde.h": "c",
+        "esp_log.h": "c",
+        "h_bridge.h": "c",
+        "pid.h": "c",
+        "encoder.h": "c"
     }
 }

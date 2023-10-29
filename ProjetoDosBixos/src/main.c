@@ -1,20 +1,25 @@
-#include "functions.h"
+#include "esp_log.h"
+#include "h_bridge.h"
+#include "pid.h"
+#include "encoder.h"
 
-void app_main() {
-    init_param();
-    gpio_set_direction(GPIO_NUM_19, GPIO_MODE_OUTPUT);
-    gpio_set_direction(GPIO_NUM_21, GPIO_MODE_OUTPUT);
-    pcnt_unit_handle_t unit = init_encoder();
+#define DEBUG_H_BRIDGE 1
 
-    while(1){
-        for(int i = 1000; i < 4096*2; i += 1000){
-            motor_update(i, GPIO_NUM_19, GPIO_NUM_21, LEDC_CHANNEL_1);
-            printf("PWM: %d\n", i);
-            angular_velocity(unit);
-            vTaskDelay(100 / portTICK_PERIOD_MS);
-        } 
+void app_main(void) {
+
+    init_encoder(encoder_side(ENC_LEFT), ENC_LEFT);
+    pulse_count(encoder_side(ENC_LEFT));
+
+    #if DEBUG_H_BRIDGE
+    init_gpio();
+    init_pwm();
+    init_pid();
+
+    while(1)
+    {
+        update_motor(LEFT, 4095);
+        update_motor(RIGHT, -4095);
+        pid_calculate(encoder_side(ENC_LEFT));
     }
-    
-    
-    //pid_calculate(unit);
+    #endif
 }
