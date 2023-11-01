@@ -21,6 +21,7 @@
 #define KI_L 5 //Integrativo (Soma o estado anterior para auxliar o crescimento de convergência)
 #define KD_L 5 //Derivativo (Caso a velocidade inicie seu declínio, a derivada do gráfico de V se torna negativa - decrescente - e os valores somados por KD auxiliam nessa queda)
 #define KP_L 3 //Proporcional (Determina o grau de crescimento do meu parâmetro desejado - Velocidade)
+
 #define KI_R 5
 #define KP_R 5
 #define KD_R 5
@@ -32,6 +33,15 @@
 #define Min_integral 1
 
 /* Functions */
+
+typedef enum {
+        PID_LEFT = 0,
+        PID_RIGHT = 1
+    } pid_side_t;
+
+#define PID_SIDE_KP(NUM) NUM == (PID_LEFT) ? KP_L : KP_R
+#define PID_SIDE_KI(NUM) NUM == (PID_LEFT) ? KI_L : KI_R
+#define PID_SIDE_KD(NUM) NUM == (PID_LEFT) ? KD_L : KD_R
 
 /**
  * @brief Initialize PIDs parameters
@@ -52,6 +62,6 @@ esp_err_t init_pid(pcnt_unit_handle_t upcnt_unit);
 * @param pcnt_unit_handle_t Encoder configuration values. 
 * @return esp_err_t
 */
-esp_err_t pid_calculate(pcnt_unit_handle_t upcnt_unit);
+esp_err_t pid_calculate(pcnt_unit_handle_t upcnt_unit, pid_ctrl_block_handle_t pid_block_L);
 
 #endif

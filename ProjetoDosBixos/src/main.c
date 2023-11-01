@@ -7,13 +7,15 @@
 
 void app_main(void) {
 
-    pcnt_unit_handle_t unit = init_encoder(ENC_LEFT);
-    init_pid(unit);
-
-
-    #if DEBUG_H_BRIDGE
-    //init_gpio();
+    init_gpio();
+    //int pid(PID_SIDE(PID_LEFT));
     //init_pwm();
+    pcnt_unit_handle_t unit1 = init_encoder(ENC_LEFT);
+    pcnt_unit_handle_t unit2 = init_encoder(ENC_RIGHT);
+    init_pid(unit1);
+    //pid_calculate(unit1, unit2);
+
+    #if DEBUG_H_BRIDG
     
     #endif
 }

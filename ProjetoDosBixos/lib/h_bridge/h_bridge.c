@@ -8,6 +8,9 @@ esp_err_t init_gpio()
     gpio_set_direction(INPUT_RIGHT_1, GPIO_MODE_OUTPUT);
     gpio_set_direction(INPUT_RIGHT_2, GPIO_MODE_OUTPUT);
 
+    gpio_set_direction(LEDC_OUTPUT_RIGHT, GPIO_MODE_OUTPUT);
+    gpio_set_direction(LEDC_OUTPUT_LEFT, GPIO_MODE_OUTPUT);
+
     return ESP_OK;
 }
 
