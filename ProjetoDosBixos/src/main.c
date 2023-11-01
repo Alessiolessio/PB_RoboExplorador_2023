@@ -7,19 +7,13 @@
 
 void app_main(void) {
 
-    init_encoder(encoder_side(ENC_LEFT), ENC_LEFT);
-    pulse_count(encoder_side(ENC_LEFT));
+    pcnt_unit_handle_t unit = init_encoder(ENC_LEFT);
+    init_pid(unit);
+
 
     #if DEBUG_H_BRIDGE
-    init_gpio();
-    init_pwm();
-    init_pid();
-
-    while(1)
-    {
-        update_motor(LEFT, 4095);
-        update_motor(RIGHT, -4095);
-        pid_calculate(encoder_side(ENC_LEFT));
-    }
+    //init_gpio();
+    //init_pwm();
+    
     #endif
 }

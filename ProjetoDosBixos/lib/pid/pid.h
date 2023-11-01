@@ -40,7 +40,7 @@
  * 
  * @return esp_err_t
  */
-esp_err_t init_pid(void);
+esp_err_t init_pid(pcnt_unit_handle_t upcnt_unit);
 
 
 /**

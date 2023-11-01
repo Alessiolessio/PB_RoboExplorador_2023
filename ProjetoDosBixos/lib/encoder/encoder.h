@@ -32,16 +32,16 @@
     /* Macros */
 
     /* PCNT Limits */
-    #define PCNT_HIGH_LIMIT 100
-    #define PCNT_LOW_LIMIT  -100
+    #define PCNT_HIGH_LIMIT 1500
+    #define PCNT_LOW_LIMIT  -1500
 
     /* Right encoder defines */
     #define CHA_ENCODER_1R 14
     #define CHA_ENCODER_2R 15
 
     /* Left encoder defines */
-    #define CHA_ENCODER_1L 16
-    #define CHA_ENCODER_2L 17
+    #define CHA_ENCODER_1L 19
+    #define CHA_ENCODER_2L 18
 
 
     /* Macro functions */
@@ -69,7 +69,7 @@
      * @param encoder Handle of the encoder unit to be configured
      * @param cha_encoder Flag indicating the channel A of the encoder
      */
-    void init_encoder(pcnt_unit_handle_t encoder, encoder_side_t cha_encoder);
+   pcnt_unit_handle_t  init_encoder(encoder_side_t cha_encoder);
 
     /**
      * @brief Callback function when a watchpoint is reached
