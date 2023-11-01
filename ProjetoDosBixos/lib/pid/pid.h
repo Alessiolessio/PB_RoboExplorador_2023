@@ -50,8 +50,7 @@ typedef enum {
  * 
  * @return esp_err_t
  */
-esp_err_t init_pid(pcnt_unit_handle_t upcnt_unit);
-
+pid_ctrl_block_handle_t init_pid(pid_side_t side);
 
 /**
 * @brief Calculate the PWM values based on the error
@@ -62,6 +61,6 @@ esp_err_t init_pid(pcnt_unit_handle_t upcnt_unit);
 * @param pcnt_unit_handle_t Encoder configuration values. 
 * @return esp_err_t
 */
-esp_err_t pid_calculate(pcnt_unit_handle_t upcnt_unit, pid_ctrl_block_handle_t pid_block_L);
+esp_err_t pid_calculate(pcnt_unit_handle_t upcnt_unit_L, pid_ctrl_block_handle_t pid_block_L, pcnt_unit_handle_t upcnt_unit_R, pid_ctrl_block_handle_t pid_block_R);
 
 #endif

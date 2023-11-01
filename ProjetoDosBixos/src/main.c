@@ -8,12 +8,13 @@
 void app_main(void) {
 
     init_gpio();
-    //int pid(PID_SIDE(PID_LEFT));
     //init_pwm();
     pcnt_unit_handle_t unit1 = init_encoder(ENC_LEFT);
     pcnt_unit_handle_t unit2 = init_encoder(ENC_RIGHT);
-    init_pid(unit1);
-    //pid_calculate(unit1, unit2);
+    pid_ctrl_block_handle_t block_pid_right = init_pid(PID_RIGHT);
+    pid_ctrl_block_handle_t block_pid_left = init_pid(PID_LEFT);
+    
+    pid_calculate(unit1, block_pid_left, unit2, block_pid_right);
 
     #if DEBUG_H_BRIDG
     
