@@ -7,8 +7,9 @@
 
 void app_main(void) {
 
+    //Param_initialization
     init_gpio();
-    //init_pwm();
+    init_pwm();
     pcnt_unit_handle_t unit1 = init_encoder(ENC_LEFT);
     pcnt_unit_handle_t unit2 = init_encoder(ENC_RIGHT);
     pid_ctrl_block_handle_t block_pid_right = init_pid(PID_RIGHT);

@@ -46,10 +46,10 @@ typedef enum{
 #define LEDC_DUTY_RES           LEDC_TIMER_13_BIT   // Set duty resolution to 13 bits
 #define LEDC_FREQUENCY          (5000)              // Frequency of 4kHz
 
-#define LEDC_OUTPUT_LEFT        GPIO_NUM_34
+#define LEDC_OUTPUT_LEFT        GPIO_NUM_13
 #define LEDC_CHANNEL_LEFT       LEDC_CHANNEL_0
 
-#define LEDC_OUTPUT_RIGHT       GPIO_NUM_32
+#define LEDC_OUTPUT_RIGHT       GPIO_NUM_12
 #define LEDC_CHANNEL_RIGHT      LEDC_CHANNEL_1
 
 /* Macro functions */
