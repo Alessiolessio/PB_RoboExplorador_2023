@@ -74,7 +74,7 @@ esp_err_t pid_calculate(pcnt_unit_handle_t upcnt_unit_L, pid_ctrl_block_handle_t
 * @param void. 
 * @return float.
 */
-float pid_get_target(void);
+//float pid_get_target(void);
 
 
 /**
@@ -86,5 +86,5 @@ float pid_get_target(void);
 * @param void. 
 * @return bool.
 */
-bool target_change_flag(void);
+//bool target_change_flag(void);
 #endif

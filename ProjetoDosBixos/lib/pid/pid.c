@@ -1,4 +1,5 @@
-#include "pid.h"3
+#include "pid.h"
+float valor_lido = 0;
 
 const char *TAG_PID = "PID";
 
@@ -24,21 +25,11 @@ pid_ctrl_block_handle_t init_pid(pid_side_t side){
     return pid_block;
 }
 
-//Function to be defined by comunication
-float pid_get_target(){
-  return 22;
-}
-
-//Flag to be sent by comunication
-bool target_change_flag(){
-    return false;
-}
-
 esp_err_t pid_calculate(pcnt_unit_handle_t upcnt_unit_L, pid_ctrl_block_handle_t pid_block_L, pcnt_unit_handle_t upcnt_unit_R, pid_ctrl_block_handle_t pid_block_R){
   float controll_pid_LEFT, controll_pid_RIGHT;
-  float target_LEFT = pid_get_target();
-  float target_RIGHT = pid_get_target();
-  /*while(!target_change_flag()){
+  float target_LEFT = valor_lido;
+  float target_RIGHT = valor_lido;
+  /*while(FLAG_TARGET){
 
     float current_velocity_LEFT = pulse_count(upcnt_unit_L) * 0.02;
     float current_velocity_RIGHT = pulse_count(upcnt_unit_R) * 0.02;
