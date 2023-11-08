@@ -75,4 +75,16 @@ esp_err_t pid_calculate(pcnt_unit_handle_t upcnt_unit_L, pid_ctrl_block_handle_t
 * @return float.
 */
 float pid_get_target(void);
+
+
+/**
+* @brief It sends a flag to stop the PID
+* 
+* This function sends a boolean flag defined by comunication, representing false when the velocity stays the same and true when a new target
+* value is received, stoping the PID execution and passing a new target value. 
+* 
+* @param void. 
+* @return bool.
+*/
+bool target_change_flag(void);
 #endif
