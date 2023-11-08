@@ -1,4 +1,4 @@
-#include "pid.h"
+#include "pid.h"3
 
 const char *TAG_PID = "PID";
 
@@ -24,14 +24,19 @@ pid_ctrl_block_handle_t init_pid(pid_side_t side){
     return pid_block;
 }
 
-esp_err_t pid_calculate(pcnt_unit_handle_t upcnt_unit_L, pid_ctrl_block_handle_t pid_block_L, pcnt_unit_handle_t upcnt_unit_R, pid_ctrl_block_handle_t pid_block_R){
-  
-  float controll_pid_LEFT, controll_pid_RIGHT;
-  float target_LEFT = 16, target_RIGHT = 22;
+float pid_get_target(){
+  return 22;
+}
 
+esp_err_t pid_calculate(pcnt_unit_handle_t upcnt_unit_L, pid_ctrl_block_handle_t pid_block_L, pcnt_unit_handle_t upcnt_unit_R, pid_ctrl_block_handle_t pid_block_R){
+  float past_target_L = 0, past_target_R = 0;
+  float controll_pid_LEFT, controll_pid_RIGHT;
+  float target_LEFT = pid_get_target();
+  float target_RIGHT = pid_get_target();
+  /*while(past_target_L == target_LEFT && past_target_R == target_RIGHT){}*/
   for(int i = 0; i < 10; i++){
-    float current_velocity_LEFT = pulse_count(upcnt_unit_R) * 0.04;
-    float current_velocity_RIGHT = pulse_count(upcnt_unit_L) * 0.02;
+    float current_velocity_LEFT = pulse_count(upcnt_unit_L) * 0.02;
+    float current_velocity_RIGHT = pulse_count(upcnt_unit_R) * 0.02;
 
     //Recalculate an error
     ESP_LOGI(TAG_PID, "Velocidade inicial : %f", current_velocity_LEFT);
@@ -45,12 +50,18 @@ esp_err_t pid_calculate(pcnt_unit_handle_t upcnt_unit_L, pid_ctrl_block_handle_t
       pid_compute(pid_block_L, error_motor_LEFT, &controll_pid_LEFT);
       pid_compute(pid_block_R, error_motor_RIGHT, &controll_pid_RIGHT);
       ESP_LOGI(TAG_PID, "Velocidade final: %f", controll_pid_LEFT);
-      /*update_motor(LEFT, controll_pid_LEFT);
-      update_motor(RIGHT, controll_pid_RIGHT);*/
+      update_motor(LEFT, 20*controll_pid_LEFT);
+      //update_motor(RIGHT, controll_pid_RIGHT);
 
-      vTaskDelay(100 / portTICK_PERIOD_MS);
+      //Update the target value
+      past_target_L = target_LEFT;
+      past_target_R = target_RIGHT;
+
+      float target_LEFT = pid_get_target();
+      float target_RIGHT = pid_get_target();
+
+      vTaskDelay(300 / portTICK_PERIOD_MS);
   }
   return ESP_OK;
-
 }
   
