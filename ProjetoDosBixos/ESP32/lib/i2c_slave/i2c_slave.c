@@ -1,7 +1,6 @@
 #include "i2c_slave.h"
 
 int valor = 0; // GLobal variable for testing communincation intercores
-int valor_lido = 0;
 
 static esp_err_t i2c_slave_init(void) {
     
@@ -29,6 +28,7 @@ static esp_err_t i2c_slave_init(void) {
 static int i2c_read_task(void *params) {
 
     int x = 0;
+    int last_value = 0;
 
     uint8_t rx_data[I2C_SLAVE_RX_BUF_LEN];
 
@@ -40,6 +40,9 @@ static int i2c_read_task(void *params) {
     } 
 
     if (size > 0) {
+        if(last_value != x){
+            FLAG_TARGET = true;
+        }
         return x;
 
     } else {

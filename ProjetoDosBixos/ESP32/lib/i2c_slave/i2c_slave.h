@@ -20,6 +20,7 @@
 #include "driver/gpio.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/queue.h"
+#include "utils.h"
 
 // Definição dos parâmetros do barramento I2C
 #define I2C_SLAVE_NUM I2C_NUM_0
