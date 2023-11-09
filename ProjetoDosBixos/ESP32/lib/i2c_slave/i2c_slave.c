@@ -76,11 +76,13 @@ static void i2c_task_com(void *params) {
 
         vTaskDelay(FREQ_COMMUNICATION / portTICK_PERIOD_MS);
 
-        valor_lido = i2c_read_task(NULL);
+        TARGET_VALUE_L = i2c_read_task(NULL);
+        TARGET_VALUE_R = i2c_read_task(NULL);
+
 
         vTaskDelay(FREQ_COMMUNICATION / portTICK_PERIOD_MS);
 
-        i2c_write_task(params, valor);
+        //i2c_write_task(params, valor);
 
     }
 
