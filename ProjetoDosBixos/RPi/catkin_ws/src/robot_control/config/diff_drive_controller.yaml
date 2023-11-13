@@ -1,0 +1,44 @@
+mobile_base_controller:
+  type        : "diff_drive_controller/DiffDriveController"  # Tipo de controlador para base móvel diferencial
+  left_wheel  : 'wheel_left_joint'                            # Nome da junta da roda esquerda
+  right_wheel : 'wheel_right_joint'                           # Nome da junta da roda direita
+  publish_rate: 50.0               # Frequência de publicação, padrão: 50 Hz
+  pose_covariance_diagonal : [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 1000.0]
+  twist_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 1000.0]
+
+  # Separação e diâmetro da roda. Esses são opcionais.
+  # O diff_drive_controller tentará ler um ou ambos do URDF se não forem especificados como parâmetros
+
+  wheel_separation : 0.24           # Distância entre rodas
+  wheel_radius : 0.05                # Raio da roda
+
+  # Multiplicadores de separação e raio da roda
+  wheel_separation_multiplier: 1.0   # Padrão: 1.0
+  wheel_radius_multiplier    : 1.0   # Padrão: 1.0
+
+  # Tempo limite para comandos de velocidade [s], padrão 0.5
+  cmd_vel_timeout: 0.5
+
+  # frame_id da base
+  base_frame_id: base_link 
+
+  # Limites de velocidade e aceleração
+  # Sempre que min_* não for especificado, o padrão é -max_*
+  linear:
+    x:
+      has_velocity_limits    : true  # Limites de velocidade ativos
+      max_velocity           : 1.0   # Velocidade máxima permitida em m/s
+      min_velocity           : -0.5  # Velocidade mínima permitida em m/s
+      has_acceleration_limits: true  # Limites de aceleração ativos
+      max_acceleration       : 0.8   # Aceleração máxima permitida em m/s^2
+      min_acceleration       : -0.4  # Aceleração mínima permitida em m/s^2
+      has_jerk_limits        : true  # Limites de jerk ativos
+      max_jerk               : 5.0   # Jerk máximo permitido em m/s^3
+  angular:
+    z:
+      has_velocity_limits    : true  # Limites de velocidade ativos
+      max_velocity           : 1.7   # Velocidade angular máxima permitida em rad/s
+      has_acceleration_limits: true  # Limites de aceleração ativos
+      max_acceleration       : 1.5   # Aceleração angular máxima permitida em rad/s^2
+      has_jerk_limits        : true  # Limites de jerk ativos
+      max_jerk               : 2.5   # Jerk angular máximo permitido em rad/s^3

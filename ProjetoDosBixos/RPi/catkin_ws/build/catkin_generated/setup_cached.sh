@@ -8,3 +8,4 @@
 
 # modified environment variables
 export PWD='/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build'
+export PYTHONPATH="/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/lib/python3/dist-packages:$PYTHONPATH"
