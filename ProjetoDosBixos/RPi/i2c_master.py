@@ -10,7 +10,7 @@ from std_msgs.msg import Int32
 # Constantes
 ESP32_ADDRESS = 0x08 # Endereço do dispositivo ESP32 no barramento I2C
 I2C_BUS = 1  # Número do barramento I2C no Raspberry Pi
-REG_ADDRESS = 10  # Endereço de registro (offset) a ser usado
+REG_ADDRESS = 10  # Endereço de registro (offset) a ser usado pelo PID da direita
 WAIT_TIME_SECONDS = 2  # Tempo de espera entre leituras/escritas (em segundos)
 
 # Classe para comunicação I2C
@@ -23,23 +23,23 @@ class I2CCommunication:
     def read_data(self):
 
         try:
-            data = self.i2c.read_i2c_block_data(self.device_address, REG_ADDRESS,4) # Faz a leitura da ESP32
+            data = self.i2c.read_i2c_block_data(self.device_address, REG_ADDRESS, 8) # Faz a leitura da ESP32
            # data.reverse()
-            value = struct.unpack('!i', bytes(data)) # Desempacota as informações recebidas
+            value_right, value_left = struct.unpack('!ii', bytes(data[:3]), bytes(data[3:])) # Desempacota as informações recebidas
 
             # '!i' significa que o valor a ser enviado é um int (i) e é "big-endian" (MSB -> esquerda e LSB -> direita) 
 
-            return value # Retorna valor lido da ESP32
+            return value_right # Retorna valor lido da ESP32
 
         except Exception as e:
             print(f"Erro na leitura: {str(e)}")
             return None
 
-    def write_data(self, value):
+    def write_data(self, value_right, value_left):
 
         try:
             # "Empacota" o valor mandado como parâmetro da função
-            data = struct.pack('!i', value)
+            data = struct.pack('!ii', value_right, value_left)
            # print(f'Valor enviado: {data}')
             print(f'Valor enviado: {value}')
 
@@ -61,11 +61,11 @@ def main():
     rate = rospy.Rate(10) # 10Hz
 
     while not rospy.is_shutdown():
-        const_value = i2c_communication.read_data()
+        # const_value = i2c_communication.read_data()
 	
         if const_value is not None:
-            pub.publish(const_value[0])
-            i2c_communication.write_data(const_value[0])
+            pub.publish(22, 33)
+            i2c_communication.write_data(22, 33)
             
         rate.sleep()
 

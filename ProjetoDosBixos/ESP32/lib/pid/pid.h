@@ -15,7 +15,8 @@
 /* Includes */
 #include "pid_ctrl.h"
 #include "encoder.h"
-#include "h_bridge.h"      
+#include "h_bridge.h"   
+#include "utils.h"   
 
 /* Definition of PID controlls parameters. */
 #define KI_L 1 //Integrativo (Soma o estado anterior para auxliar o crescimento de convergência)
@@ -66,25 +67,4 @@ pid_ctrl_block_handle_t init_pid(pid_side_t side);
 */
 esp_err_t pid_calculate(pcnt_unit_handle_t upcnt_unit_L, pid_ctrl_block_handle_t pid_block_L, pcnt_unit_handle_t upcnt_unit_R, pid_ctrl_block_handle_t pid_block_R);
 
-/**
-* @brief It gets a velocity target for motor
-* 
-* This function gets a velocity target sent by the control in frequency previously set
-* 
-* @param void. 
-* @return float.
-*/
-//float pid_get_target(void);
-
-
-/**
-* @brief It sends a flag to stop the PID
-* 
-* This function sends a boolean flag defined by comunication, representing false when the velocity stays the same and true when a new target
-* value is received, stoping the PID execution and passing a new target value. 
-* 
-* @param void. 
-* @return bool.
-*/
-//bool target_change_flag(void);
 #endif
