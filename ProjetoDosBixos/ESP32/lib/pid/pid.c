@@ -1,4 +1,5 @@
 #include "pid.h"
+
 float valor_lido = 0;
 
 const char *TAG_PID = "PID";
@@ -27,52 +28,72 @@ pid_ctrl_block_handle_t init_pid(pid_side_t side){
 
 esp_err_t pid_calculate(pcnt_unit_handle_t upcnt_unit_L, pid_ctrl_block_handle_t pid_block_L, pcnt_unit_handle_t upcnt_unit_R, pid_ctrl_block_handle_t pid_block_R){
   float controll_pid_LEFT, controll_pid_RIGHT;
-  float target_LEFT = valor_lido;
-  float target_RIGHT = valor_lido;
-  /*while(FLAG_TARGET){
 
-    float current_velocity_LEFT = pulse_count(upcnt_unit_L) * 0.02;
-    float current_velocity_RIGHT = pulse_count(upcnt_unit_R) * 0.02;
+  float target_LEFT = TARGET_VALUE_L;
+  float target_RIGHT = TARGET_VALUE_R;
 
-    //Recalculate an error
-    ESP_LOGI(TAG_PID, "Velocidade inicial : %f", current_velocity_LEFT);
-    float error_motor_LEFT = (target_LEFT - current_velocity_LEFT);
-    float error_motor_RIGHT = (target_RIGHT - current_velocity_RIGHT);
-    ESP_LOGI(TAG_PID, "Erro: %f", error_motor_LEFT);
+  // while(!FLAG_TARGET){
+
+  //   float ENCODER_READ_L = pulse_count(upcnt_unit_L) * 0.02;
+  //   float ENCODER_READ_R = pulse_count(upcnt_unit_R) * 0.02;
+
+  //   //Recalculate an error
+  //   ESP_LOGI(TAG_PID, "Velocidade inicial ESQUERDA: %f", ENCODER_READ_L);
+  //   ESP_LOGI(TAG_PID, "Velocidade inicial DIREITA: %f", ENCODER_READ_R);
+
+  //   float error_motor_LEFT = (target_LEFT - ENCODER_READ_L);
+  //   float error_motor_RIGHT = (target_RIGHT - ENCODER_READ_R);
+    
+  //   ESP_LOGI(TAG_PID, "Erro ESQUERDA: %f", error_motor_LEFT);
+  //   ESP_LOGI(TAG_PID, "Erro DIREITA: %f", error_motor_RIGHT);
       
-      vTaskDelay(100 / portTICK_PERIOD_MS);
+  //   vTaskDelay(100 / portTICK_PERIOD_MS);
 
-      //Calculate a new PWM Value
-      pid_compute(pid_block_L, error_motor_LEFT, &controll_pid_LEFT);
-      pid_compute(pid_block_R, error_motor_RIGHT, &controll_pid_RIGHT);
-      ESP_LOGI(TAG_PID, "Velocidade final: %f", controll_pid_LEFT);
-      update_motor(LEFT, 20*controll_pid_LEFT);
-      //update_motor(RIGHT, controll_pid_RIGHT);
+  //   //Calculate a new PWM Value
+  //   pid_compute(pid_block_L, error_motor_LEFT, &controll_pid_LEFT);
+  //   pid_compute(pid_block_R, error_motor_RIGHT, &controll_pid_RIGHT);
 
-      vTaskDelay(300 / portTICK_PERIOD_MS);
+  //   ESP_LOGI(TAG_PID, "Velocidade final ESQUERDA: %f", controll_pid_LEFT);
+  //   ESP_LOGI(TAG_PID, "Velocidade final DIREITA: %f", controll_pid_RIGHT);
 
-  }*/
+  //   update_motor(LEFT, 20 * controll_pid_LEFT);
+  //   update_motor(RIGHT, 20 * controll_pid_RIGHT);
+
+  //   vTaskDelay(300 / portTICK_PERIOD_MS);
+
+  // }
+
   for(int i = 0; i < 10; i++){
-    float current_velocity_LEFT = pulse_count(upcnt_unit_L) * 0.02;
-    float current_velocity_RIGHT = pulse_count(upcnt_unit_R) * 0.02;
+
+    ENCODER_READ_L = pulse_count(upcnt_unit_L) * 0.02;
+    ENCODER_READ_R = pulse_count(upcnt_unit_R) * 0.02;
 
     //Recalculate an error
-    ESP_LOGI(TAG_PID, "Velocidade inicial : %f", current_velocity_LEFT);
-    float error_motor_LEFT = (target_LEFT - current_velocity_LEFT);
-    float error_motor_RIGHT = (target_RIGHT - current_velocity_RIGHT);
-    ESP_LOGI(TAG_PID, "Erro: %f", error_motor_LEFT);
+    ESP_LOGI(TAG_PID, "Velocidade inicial ESQUERDA: %f", ENCODER_READ_L);
+    ESP_LOGI(TAG_PID, "Velocidade inicial DIREITA: %f", ENCODER_READ_R);
+
+    float error_motor_LEFT = (target_LEFT - ENCODER_READ_L);
+    float error_motor_RIGHT = (target_RIGHT - ENCODER_READ_R);
+
+    ESP_LOGI(TAG_PID, "Erro ESQUERDA: %f", error_motor_LEFT);
+    ESP_LOGI(TAG_PID, "Erro DIREITA: %f", error_motor_RIGHT);
       
-      vTaskDelay(100 / portTICK_PERIOD_MS);
+    vTaskDelay(100 / portTICK_PERIOD_MS);
 
-      //Calculate a new PWM Value
-      pid_compute(pid_block_L, error_motor_LEFT, &controll_pid_LEFT);
-      pid_compute(pid_block_R, error_motor_RIGHT, &controll_pid_RIGHT);
-      ESP_LOGI(TAG_PID, "Velocidade final: %f", controll_pid_LEFT);
-      update_motor(LEFT, 20*controll_pid_LEFT);
-      //update_motor(RIGHT, controll_pid_RIGHT);
+    //Calculate a new PWM Value
+    pid_compute(pid_block_L, error_motor_LEFT, &controll_pid_LEFT);
+    pid_compute(pid_block_R, error_motor_RIGHT, &controll_pid_RIGHT);
 
-      vTaskDelay(300 / portTICK_PERIOD_MS);
+    ESP_LOGI(TAG_PID, "Velocidade final ESQUERDA: %f", controll_pid_LEFT);
+    ESP_LOGI(TAG_PID, "Velocidade final DIREITA: %f", controll_pid_RIGHT);
+
+    // Pq 20??
+    update_motor(LEFT, 20 * controll_pid_LEFT);
+    update_motor(RIGHT, 20 * controll_pid_RIGHT);
+
+    vTaskDelay(300 / portTICK_PERIOD_MS);
   }
+
   return ESP_OK;
 }
   

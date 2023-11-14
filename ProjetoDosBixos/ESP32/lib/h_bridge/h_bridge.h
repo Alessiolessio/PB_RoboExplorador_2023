@@ -11,7 +11,7 @@
  * can control motors connected to an H-bridge motor driver circuit, which allows bidirectional
  * control of DC motors.
  *
- * Authors:
+ * Authors: 
  *          
  */
 
@@ -33,12 +33,12 @@ typedef enum{
 #define HIGH    1
 
 // GPIOs of h-bridge for right motor
-#define INPUT_LEFT_1    GPIO_NUM_22
-#define INPUT_LEFT_2    GPIO_NUM_23
+#define INPUT_LEFT_1    GPIO_NUM_18
+#define INPUT_LEFT_2    GPIO_NUM_19
 
 // GPIOs of h-bridge for left motor
-#define INPUT_RIGHT_1   GPIO_NUM_2
-#define INPUT_RIGHT_2   GPIO_NUM_4
+#define INPUT_RIGHT_1   GPIO_NUM_3
+#define INPUT_RIGHT_2   GPIO_NUM_34
 
 // PWM Config 
 #define LEDC_TIMER              LEDC_TIMER_0
@@ -46,10 +46,10 @@ typedef enum{
 #define LEDC_DUTY_RES           LEDC_TIMER_13_BIT   // Set duty resolution to 13 bits
 #define LEDC_FREQUENCY          (5000)              // Frequency of 4kHz
 
-#define LEDC_OUTPUT_LEFT        GPIO_NUM_13
+#define LEDC_OUTPUT_LEFT        GPIO_NUM_22 // Enable PWM A
 #define LEDC_CHANNEL_LEFT       LEDC_CHANNEL_0
 
-#define LEDC_OUTPUT_RIGHT       GPIO_NUM_12
+#define LEDC_OUTPUT_RIGHT       GPIO_NUM_17 // Enable PWM B 
 #define LEDC_CHANNEL_RIGHT      LEDC_CHANNEL_1
 
 /* Macro functions */

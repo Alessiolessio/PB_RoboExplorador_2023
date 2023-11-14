@@ -1,8 +1,9 @@
 #include "i2c_slave.h"
 
-int valor = 0; // GLobal variable for testing communincation intercores
+QueueHandle_t i2c_write_queue = NULL; 
+const char *TAG = "i2c-teste"; 
 
-static esp_err_t i2c_slave_init(void) {
+esp_err_t i2c_slave_init(void) {
     
     int i2c_slave_port = I2C_SLAVE_NUM;
 
@@ -25,105 +26,100 @@ static esp_err_t i2c_slave_init(void) {
     return i2c_driver_install(i2c_slave_port, conf_slave.mode, I2C_SLAVE_RX_BUF_LEN, I2C_SLAVE_TX_BUF_LEN, 0);
 }
 
-static int i2c_read_task(void *params) {
+void i2c_read_task() {
 
-    int x = 0;
-    int last_value = 0;
+    int read_value_r = 0;
+    int read_value_l = 0;
 
     uint8_t rx_data[I2C_SLAVE_RX_BUF_LEN];
 
     int size = i2c_slave_read_buffer(I2C_SLAVE_NUM, rx_data, READ_LEN_VALUE, TIMEOUT_MS / portTICK_PERIOD_MS);
 
-    // "Unpacking" valores
-    for(int i = 2; i < size; i++){
-        x |= (rx_data[i] << 8 * ((READ_LEN_VALUE - 1) - i));
+    // "Unpacking" data values (right)
+    for(int i = 2; i < 6; i++){
+        read_value_r |= (rx_data[i] << 8 * ((READ_LEN_VALUE - 1) - i));
+    } 
+    
+    // "Unpacking" data values (left)
+    for(int i = 6; i < 9; i++){
+        read_value_l |= (rx_data[i] << 8 * ((READ_LEN_VALUE - 1) - i));
     } 
 
     if (size > 0) {
-        if(last_value != x){
+
+        if(TARGET_VALUE_R != read_value_r ||
+        TARGET_VALUE_L != read_value_l){
             FLAG_TARGET = true;
+        } else {
+            FLAG_TARGET = false;
         }
-        return x;
+
+        TARGET_VALUE_R = 22;
+        TARGET_VALUE_L = 22;
 
     } else {
         ESP_LOGI(TAG, "Read failed!");
     }
 
-    return 0;
 }
 
-static void i2c_write_task(void *params, int value) {
+void i2c_write_task(int value_r, int value_l) {
     uint8_t tx_data[WRITE_LEN_VALUE];
 
-    // "Packing" valores
-    for (int i = 0; i < WRITE_LEN_VALUE; i++) {
-        tx_data[i] = (value >> 8 * ((WRITE_LEN_VALUE - 1) - i)) & LAST_BYTE_MASK;
+    // "Packing" values right
+    for (int i = 0; i < WRITE_LEN_VALUE/ 2; i++) {
+        tx_data[i] = (value_r >> 8 * ((WRITE_LEN_VALUE - 1) - i)) & LAST_BYTE_MASK;
+    }
+
+    // "Packing" values left
+    for (int i = WRITE_LEN_VALUE / 2; i < WRITE_LEN_VALUE; i++) {
+        tx_data[i] = (value_l >> 8 * ((WRITE_LEN_VALUE - 1) - i)) & LAST_BYTE_MASK;
     }
 
     int size = i2c_slave_write_buffer(I2C_SLAVE_NUM, tx_data, WRITE_LEN_VALUE, TIMEOUT_MS / portTICK_PERIOD_MS);
 
     if (size > 0) {
-        printf("Valor escrito: %d \n", value);
+        printf("Write value: %d, %d\n", value_r, value_l);
     } else {
-        ESP_LOGI(TAG, "Escrita falhou!");
+        ESP_LOGI(TAG, "Write failed!");
     }
     
 }
 
-static void i2c_task_com(void *params) {
+void i2c_task_com() {
 
     while(1){
 
         vTaskDelay(FREQ_COMMUNICATION / portTICK_PERIOD_MS);
 
-        valor_lido = i2c_read_task(NULL);
+        i2c_read_task();
 
         vTaskDelay(FREQ_COMMUNICATION / portTICK_PERIOD_MS);
 
-        i2c_write_task(params, valor);
+        i2c_write_task(ENCODER_READ_R, ENCODER_READ_L);
 
     }
 
 }
 
-static void i2c_task_controle(void *params) {
+void task_motor_control() {
 
-    while(1){
-
-        vTaskDelay(FREQ_CONTROL / portTICK_PERIOD_MS);
-
-        valor++;
-
-        printf("Valor lido: %d \n", valor_lido);
-
-    }
+    motor_ctrl();
 
 }
 
-esp_err_t create_tasks(int parametros, int display) {
+esp_err_t create_tasks() {
 
     ESP_ERROR_CHECK(i2c_slave_init());
 
     i2c_write_queue = xQueueCreate(10, I2C_SLAVE_TX_BUF_LEN);
 
-    // Task 1 (core 0): leitura + escrita de dados
-    xTaskCreatePinnedToCore(i2c_task_com, "i2c_task_com", 2048, &parametros, 5, NULL, 0);
+    // Task 1 (core 0): read + write data
+    //xTaskCreatePinnedToCore(i2c_task_com, "i2c_task_com", 2048, NULL, 5, NULL, 0);
 
-    // Task 2 (core 1): controle do motor e derivados
-    xTaskCreatePinnedToCore(i2c_task_controle, "i2c_task_controle", 2048, NULL, 5, NULL, 1);
+    // Task 2 (core 1): control 
+    xTaskCreatePinnedToCore(task_motor_control, "task_motor_control", 2048, NULL, 5, NULL, 1);
 
     return ESP_OK;
-}
-
-static void display_data(uint8_t *data, int len) {
-    int i;
-    for (i = 2; i < len; i++) {
-        printf("%02x ", data[i]);
-
-        if ((i + 1) % 16 == 0) {
-            printf("\n");
-        }
-    }
-    printf("\n");
 }
 

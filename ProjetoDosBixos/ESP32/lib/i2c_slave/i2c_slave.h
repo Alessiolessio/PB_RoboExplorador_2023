@@ -2,13 +2,13 @@
 #define __I2CSLAVE__
 
 /**
- * @brief Código para comunicação I2C em modo escravo.
+ * @brief Code for I2C communication in slave mode.
  * 
- * Autores: Matheus Paiva Angarola e William Noboru Yoshihara 
+ * Authors: Matheus Paiva Angarola and William Noboru Yoshihara 
  * 
- * Este código configura e inicia o barramento I2C em modo escravo para comunicação
- * com um mestre. Ele lê e escreve dados no barramento I2C, desempacota e empacota valores.
- * O código cria tarefas para leitura e escrita de dados e também para funções de control.
+ * This code sets up and starts the I2C bus in slave mode for communication
+ * with a master. It reads and writes data on the I2C bus, unpacks and packs values.
+ * The code creates tasks for reading and writing data and also for control functions.
  */
 
 #include <stdio.h>
@@ -22,111 +22,99 @@
 #include "freertos/queue.h"
 #include "utils.h"
 
-// Definição dos parâmetros do barramento I2C
+// Definition of I2C bus parameters
 #define I2C_SLAVE_NUM I2C_NUM_0
-#define I2C_SLAVE_SCL_IO 22 // Pino SLC da ESP32
-#define I2C_SLAVE_SDA_IO 21 // Pino SDA da ESP32
+#define I2C_SLAVE_SCL_IO 22 // ESP32 SLC Pin
+#define I2C_SLAVE_SDA_IO 21 // ESP32 SDA Pin
 #define I2C_SLAVE_TX_BUF_LEN 256
 #define I2C_SLAVE_RX_BUF_LEN 256
 #define I2C_SLAVE_ADDRESS 0x08
 
-// Definição dos valores realmente utilizados na escrita e leitura
-#define WRITE_LEN_VALUE 4
-#define READ_LEN_VALUE 6
+// Definition of values used in read and write
+#define WRITE_LEN_VALUE 8
+#define READ_LEN_VALUE 9
 #define TIMEOUT_MS 250 
 
-// Definição de valores para empacotamento de desempacotamento
+// Definition of values for packing and unpacking
 #define LAST_BYTE_MASK 0xFF
 
-// Definição de frequências utilizadas dentro das tasks
+// Definition of frequencies used within tasks
 #define FREQ_COMMUNICATION 58
 #define FREQ_CONTROL 2000
 
-static QueueHandle_t i2c_write_queue = NULL; 
-static const char *TAG = "i2c-teste"; // TAG utilizada para dar display no console
+extern QueueHandle_t i2c_write_queue; 
+extern const char *TAG; // TAG used for console display
 
-// Protótipo de funções:
+// Function prototypes:
 
 /**
- * @brief Inicializa o driver do barramento I2C no modo escravo
+ * @brief Initializes the I2C bus driver in slave mode
  *
- * Esta função inicializa o driver I2C no modo escravo, configurando os pinos SDA e SCL,
- * definindo a configuração do barramento I2C e instalando o driver.
+ * This function initializes the I2C driver in slave mode, configuring SDA and SCL pins,
+ * setting up the I2C bus configuration, and installing the driver.
  *
  * @return
- *     - ESP_OK: O driver I2C foi inicializado com sucesso.
- *     - ESP_ERR_INVALID_ARG: Falha na inicialização devido a argumentos inválidos.
- *     - ESP_ERR_NO_MEM: Falha na inicialização devido à falta de memória disponível.
- *     - ESP_FAIL: Outros erros na inicialização do driver I2C.
+ *     - ESP_OK: I2C driver initialized successfully.
+ *     - ESP_ERR_INVALID_ARG: Initialization failed due to invalid arguments.
+ *     - ESP_ERR_NO_MEM: Initialization failed due to insufficient available memory.
+ *     - ESP_FAIL: Other errors in I2C driver initialization.
  */
-static esp_err_t i2c_slave_init(void);
+esp_err_t i2c_slave_init(void);
 
 /**
- * @brief Tarefa de leitura dos dados do barramento I2C
+ * @brief Task for reading data from the I2C bus
  *
- * Esta função é executada como uma tarefa e lê os dados do barramento I2C,
- * desempacota os valores lidos e os retorna. Os valores são enviados por outra tarefa.
+ * This function is executed as a task and reads data from the I2C bus,
+ * unpacks the read values, and returns them. Values are sent by another task.
  *
- * @param params Parâmetros da tarefa (não utilizados).
- * @return O valor lido a partir do barramento I2C.
+ * @param params Task parameters (not used).
  */
-static int i2c_read_task(void *params);
+void i2c_read_task();
 
 /**
- * @brief Tarefa de escrita de dados no barramento I2C
+ * @brief Task for writing data to the I2C bus
  *
- * Esta função é executada como uma tarefa e envia os dados recebidos por outra tarefa
- * para o barramento I2C. Os valores são empacotados antes do envio.
+ * This function is executed as a task and sends the data received by another task
+ * to the I2C bus. Values are packed before sending.
  *
- * @param params Parâmetros da tarefa (não utilizados).
- * @param value O valor a ser escrito no barramento I2C.
+ * @param params Task parameters (not used).
+ * @param value The value to be written to the I2C bus.
  */
-static void i2c_write_task(void *params, int value);
+void i2c_write_task(int value_r, int value_l) ;
 
 /**
- * @brief Tarefa de comunicação e escrita no barramento I2C
+ * @brief Task for communication and writing to the I2C bus
  *
- * Esta função é executada como uma tarefa e é responsável por coordenar a comunicação
- * entre a leitura e escrita de dados no barramento I2C. Ela lê os valores, aguarda,
- * e então escreve os valores lidos no barramento.
+ * This function is executed as a task and is responsible for coordinating communication
+ * between reading and writing data on the I2C bus. It reads values, waits,
+ * and then writes the read values to the bus.
  *
- * @param params Parâmetros da tarefa (não utilizados).
+ * @param params Task parameters (not used).
  */
-static void i2c_task_com(void *pvParameters);
+void i2c_task_com();
 
 /**
- * @brief Tarefa de controle
+ * @brief Control task
  *
- * Esta função é executada como uma tarefa e lida com o controle do motor e outros
- * aspectos relacionados. Os valores lidos do barramento I2C são utilizados aqui para
- * controle.
+ * This function is executed as a task and handles motor control and other
+ * related aspects. Values read from the I2C bus are used here for control.
  *
- * @param params Parâmetros da tarefa (não utilizados).
+ * @param params Task parameters (not used).
  */
-static void i2c_task_controle(void *pvParameters);
+void i2c_task_controle();
 
 /**
- * @brief Cria tarefas para leitura e escrita de dados no barramento I2C
+ * @brief Creates tasks for reading and writing data on the I2C bus
  *
- * Esta função cria as tarefas para leitura e escrita de dados no barramento I2C,
- * além de inicializar o driver do barramento I2C.
+ * This function creates tasks for reading and writing data on the I2C bus,
+ * in addition to initializing the I2C bus driver.
  *
- * @param parametros Parâmetros para as tarefas (não utilizados).
- * @param display Flag para controle de exibição.
+ * @param parametros Task parameters (not used).
+ * @param display Flag for display control.
  * @return
- *     - ESP_OK: As tarefas foram criadas com sucesso.
- *     - Outros códigos de erro em caso de falha.
+ *     - ESP_OK: Tasks created successfully.
+ *     - Other error codes in case of failure.
  */
-esp_err_t create_tasks(int parametros, int display);
-
-/**
- * @brief Exibe dados em formato hexadecimal
- *
- * Esta função exibe os dados em formato hexadecimal.
- *
- * @param data Ponteiro para os dados a serem exibidos.
- * @param len Tamanho dos dados.
- */
-static void display_data(uint8_t *data, int len);
+esp_err_t create_tasks();
 
 #endif
