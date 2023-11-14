@@ -22,6 +22,8 @@ mobile_base_controller:
   # frame_id da base
   base_frame_id: base_link 
 
+  # Tudo isso tem que ser definido ainda
+
   # Limites de velocidade e aceleração
   # Sempre que min_* não for especificado, o padrão é -max_*
   linear:
