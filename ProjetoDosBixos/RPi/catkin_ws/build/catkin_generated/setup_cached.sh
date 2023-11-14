@@ -7,8 +7,4 @@
 # new environment variables
 
 # modified environment variables
-export CMAKE_PREFIX_PATH="/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel:$CMAKE_PREFIX_PATH"
-export LD_LIBRARY_PATH="/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/lib:$LD_LIBRARY_PATH"
 export PWD='/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build'
-export PYTHONPATH="/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/lib/python3/dist-packages:$PYTHONPATH"
-export ROS_PACKAGE_PATH="/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src:$ROS_PACKAGE_PATH"

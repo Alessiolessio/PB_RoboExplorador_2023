@@ -39,6 +39,11 @@ void RobotHWInterface::init()
 
 void RobotHWInterface::encoderCallback(const robot_control::encoder_data::ConstPtr &msg)
 {
+    double encoder_data[2];
+    
+    encoder_data[LEFT] = msg->left_encoder_data;
+    encoder_data[RIGHT] = msg->right_encoder_data;
+
     // Implementar
 }
 

@@ -21,6 +21,13 @@
 #include "robot_control/encoder_data.h"
 #include "robot_control/velocity_data.h"
 
+
+enum MotorPosition
+{
+    LEFT = 0,
+    RIGHT = 1
+};
+
 // Define the hardware interface class
 class RobotHWInterface : public hardware_interface::RobotHW
 {
