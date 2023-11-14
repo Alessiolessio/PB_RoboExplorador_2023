@@ -54,8 +54,8 @@ void i2c_read_task() {
             FLAG_TARGET = false;
         }
 
-        TARGET_VALUE_R = read_value_r;
-        TARGET_VALUE_L = read_value_l;
+        TARGET_VALUE_R = 22;
+        TARGET_VALUE_L = 22;
 
     } else {
         ESP_LOGI(TAG, "Read failed!");
@@ -115,7 +115,7 @@ esp_err_t create_tasks() {
     i2c_write_queue = xQueueCreate(10, I2C_SLAVE_TX_BUF_LEN);
 
     // Task 1 (core 0): read + write data
-    xTaskCreatePinnedToCore(i2c_task_com, "i2c_task_com", 2048, NULL, 5, NULL, 0);
+    //xTaskCreatePinnedToCore(i2c_task_com, "i2c_task_com", 2048, NULL, 5, NULL, 0);
 
     // Task 2 (core 1): control 
     xTaskCreatePinnedToCore(task_motor_control, "task_motor_control", 2048, NULL, 5, NULL, 1);

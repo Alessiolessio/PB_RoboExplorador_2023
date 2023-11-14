@@ -14,6 +14,6 @@ extern int TARGET_VALUE_R;
 extern float ENCODER_READ_L;
 extern float ENCODER_READ_R;
 
-void motor_ctrl();
+ void motor_ctrl();
 
 #endif
