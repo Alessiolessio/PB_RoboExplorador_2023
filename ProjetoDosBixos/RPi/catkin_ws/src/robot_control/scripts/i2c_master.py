@@ -19,8 +19,23 @@ WAIT_TIME_SECONDS = 2  # Tempo de espera entre leituras/escritas (em segundos)
 class I2CCommunication:
     # "Construtor" da classe, definindo seus atributos principais
     def __init__(self, i2c_bus, device_address):
+        rospy.init_node('i2c_communicator')
+
         self.i2c = smbus.SMBus(i2c_bus)  # Define o barramento que será usado na comunicação
         self.device_address = device_address  # Define o endereço da ESP32 ao qual queremos nos comunicar
+
+        # Cria um objeto de publicação para enviar dados para o tópico ROS
+        self.pub_encoder = rospy.Publisher('/encoder_data', encoder_data, queue_size=10)
+        self.sub_joints = rospy.Subscriber('/velocity_command', velocity_data, self.joints_callback)
+
+        encoder_msg = encoder_data()
+
+        encoder_msg.left_encoder_data = 0
+        encoder_msg.right_encoder_data = 0
+
+        self.pub_encoder.publish(encoder_msg)
+
+        self.update()
 
     def read_data(self):
         try:
@@ -29,62 +44,51 @@ class I2CCommunication:
 
             print(f'Valor lido: {value_left}, {value_right}')
 
-            encoder_msg = encoder_data()
-            encoder_msg.left_encoder_data = value_left
-            encoder_msg.right_encoder_data = value_right
+            self.left_encoder_data = value_left
+            self.right_encoder_data = value_right
 
-            return encoder_msg
+            self.pub_encoder.publish(encoder_msg)
 
         except Exception as e:
             print(f"Erro na leitura: {str(e)}")
             return None
 
-    def write_data(self, value_right, value_left):
+    def write_data(self):
         try:
-            data = struct.pack('!ii', value_right, value_left)  # "Empacota" o valor mandado como parâmetro da função
+            data = struct.pack('!ii', self.right_wheel_velocity, self.left_wheel_velocity)  # "Empacota" o valor mandado como parâmetro da função
             self.i2c.write_i2c_block_data(self.device_address, REG_ADDRESS, list(data))  # Escreve valor para a ESP32
-            print(f'Valor enviado: {value_left}, {value_right}')
+            
+            print(f'Valor enviado: {self.left_wheel_velocity}, {self.right_wheel_velocity}')
 
         except Exception as e:
             print(f"Erro na escrita: {str(e)}")
 
     def joints_callback(self, msg):
+
         joint_msg = velocity_data()
         joint_msg = msg
 
         if joint_msg is not None and joint_msg.front_left_velocity != 0.0:
-            left_wheel_velocity = int(joint_msg.front_left_velocity * 100)
-            right_wheel_velocity = int(joint_msg.front_right_velocity * 100)
 
-            return right_wheel_velocity, left_wheel_velocity
+            self.left_wheel_velocity = int(joint_msg.front_left_velocity * 100)
+            self.right_wheel_velocity = int(joint_msg.front_right_velocity * 100)
+
         else:
             return None
 
-def main():
-    i2c_communication = I2CCommunication(I2C_BUS, ESP32_ADDRESS)
+    def update(self):
 
-    rospy.init_node('i2c_communicator')
+        rate = rospy.Rate(10)  # 10Hz
 
-    # Cria um objeto de publicação para enviar dados para o tópico ROS
-    pub_encoder = rospy.Publisher('/encoder_data', encoder_data, queue_size=10)
-    sub_joints = rospy.Subscriber('/velocity_command', velocity_data, i2c_communication.joints_callback)
+        while not rospy.is_shutdown():
+            self.read_data()
+            self.write_data()
 
-    rate = rospy.Rate(10)  # 10Hz
-
-    while not rospy.is_shutdown():
-        encoder_msg = i2c_communication.read_data()
-        if encoder_msg is not None:
-            pub_encoder.publish(encoder_msg)
-
-        joints_values = i2c_communication.joints_callback(sub_joints)
-        if joints_values is not None:
-            right_wheel_velocity, left_wheel_velocity = joints_values
-            i2c_communication.write_data(right_wheel_velocity, left_wheel_velocity)
-
-        rate.sleep()
+            rate.sleep()
 
 if __name__ == "__main__":
     try:
-        main()
+        RobotHWInterface()
+        rospy.spin()
     except rospy.ROSInterruptException:
         pass

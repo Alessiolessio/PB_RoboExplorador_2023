@@ -1,4 +1,5 @@
 .pio
 .vscode
-./RPi/devel/
-./RPi/build/
+
+.devel/
+.build/

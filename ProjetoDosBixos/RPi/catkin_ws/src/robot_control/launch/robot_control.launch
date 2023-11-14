@@ -1,27 +1,5 @@
 <launch>
-    <!-- Set the URDF model path -->
-    <arg name="model" default="$(find robot_description)/urdf/pb_2023.urdf"/>
-
     <!-- Start the I2C node for encoder communication -->
-    <node name="i2c_node" pkg="robot_control" type="i2c_master.py" /> 
+    <node name="i2c_communicator" pkg="robot_control" type="i2c_master.py" /> 
 
-    <!-- Load robot model -->
-    <param name="robot_description" command="$(find xacro)/xacro $(arg model)"/>
-    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /> 
-
-    <!-- Load controller settings -->
-    <rosparam file="$(find robot_control)/config/diff_drive_controller.yaml" command="load"/>
-
-    <!-- Hardware interface -->
-    <node name="robot_hw_node" pkg="robot_control" type="robot_hw_node" output="screen"> 
-        <!-- Remap the cmd_vel topic for compatibility -->
-        <remap from="/mobile_base_controller/cmd_vel" to="/cmd_vel" />
-    </node>
-
-    <!-- Controller Manager -->
-    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"
-        args="
-            /joints_update
-            /mobile_base_controller">
-    </node>
 </launch>
