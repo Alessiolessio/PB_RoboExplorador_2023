@@ -17,9 +17,11 @@
 // Boost assign library for simplified list initialization
 #include <boost/assign/list_of.hpp>
 
+#define HW_IF_UPDATE_FREQ 50
+
 // Custom message includes
-#include "robot_control/encoder_data.h"
-#include "robot_control/velocity_data.h"
+//#include "robot_control/encoder_data.msg"
+//#include "robot_control/velocity_data.msg"
 
 
 enum MotorPosition
