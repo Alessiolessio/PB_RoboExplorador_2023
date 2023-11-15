@@ -1,6 +1,6 @@
 #include "h_bridge.h"
 
-esp_err_t init_gpio()
+void init_gpio()
 {
     gpio_set_direction(INPUT_LEFT_1, GPIO_MODE_OUTPUT);
     gpio_set_direction(INPUT_LEFT_2, GPIO_MODE_OUTPUT);
@@ -11,10 +11,9 @@ esp_err_t init_gpio()
     gpio_set_direction(LEDC_OUTPUT_RIGHT, GPIO_MODE_OUTPUT);
     gpio_set_direction(LEDC_OUTPUT_LEFT, GPIO_MODE_OUTPUT);
 
-    return ESP_OK;
 }
 
-esp_err_t init_pwm()
+void init_pwm()
 {
     ledc_timer_config_t ledc_timer = {
         .speed_mode       = LEDC_MODE,
@@ -24,6 +23,8 @@ esp_err_t init_pwm()
         .clk_cfg          = LEDC_AUTO_CLK
     };
 
+    ledc_timer_config(&ledc_timer);
+
     ledc_channel_config_t ledc_left_channel = {
         .speed_mode     = LEDC_MODE,
         .channel        = LEDC_CHANNEL_LEFT,
@@ -31,8 +32,10 @@ esp_err_t init_pwm()
         .intr_type      = LEDC_INTR_DISABLE,
         .gpio_num       = LEDC_OUTPUT_LEFT,
         .duty           = 0, // Set duty to 0%
-        .hpoint         = 0
+        .hpoint         = 0,
     };
+
+    ledc_channel_config(&ledc_left_channel);
 
     ledc_channel_config_t ledc_right_channel = {
         .speed_mode     = LEDC_MODE,
@@ -44,11 +47,10 @@ esp_err_t init_pwm()
         .hpoint         = 0
     };
 
-    ESP_ERROR_CHECK(ledc_timer_config(&ledc_timer));
-    ESP_ERROR_CHECK(ledc_channel_config(&ledc_left_channel));
-    ESP_ERROR_CHECK(ledc_channel_config(&ledc_right_channel));
+    ledc_channel_config(&ledc_right_channel);
 
-    return ESP_OK;
+
+    //return ESP_OK;
 }
 
 esp_err_t update_motor(motor_side_t motor, int u)

@@ -1,4 +1,5 @@
 #include "i2c_slave.h"
+#include "utils.h"
 
 QueueHandle_t i2c_write_queue = NULL; 
 const char *TAG = "i2c-teste"; 
@@ -54,8 +55,10 @@ void i2c_read_task() {
             FLAG_TARGET = false;
         }
 
-        TARGET_VALUE_R = 22;
-        TARGET_VALUE_L = 22;
+        //printf("Read value: %d, %d\n", read_value_r, read_value_l);
+
+        TARGET_VALUE_R = read_value_r;
+        TARGET_VALUE_L = read_value_l;
 
     } else {
         ESP_LOGI(TAG, "Read failed!");
@@ -79,7 +82,7 @@ void i2c_write_task(int value_r, int value_l) {
     int size = i2c_slave_write_buffer(I2C_SLAVE_NUM, tx_data, WRITE_LEN_VALUE, TIMEOUT_MS / portTICK_PERIOD_MS);
 
     if (size > 0) {
-        printf("Write value: %d, %d\n", value_r, value_l);
+        //printf("Write value: %d, %d\n", value_r, value_l);
     } else {
         ESP_LOGI(TAG, "Write failed!");
     }
@@ -87,35 +90,37 @@ void i2c_write_task(int value_r, int value_l) {
 }
 
 void i2c_task_com() {
+    ESP_ERROR_CHECK(i2c_slave_init());
+    i2c_write_queue = xQueueCreate(10, I2C_SLAVE_TX_BUF_LEN);
 
     while(1){
-
         vTaskDelay(FREQ_COMMUNICATION / portTICK_PERIOD_MS);
-
         i2c_read_task();
-
         vTaskDelay(FREQ_COMMUNICATION / portTICK_PERIOD_MS);
-
-        i2c_write_task(ENCODER_READ_R, ENCODER_READ_L);
-
+        i2c_write_task(ENCODER_READ_L, ENCODER_READ_R);
     }
-
 }
 
 void task_motor_control() {
 
-    motor_ctrl();
+    init_gpio();
+    init_pwm();
 
+    pid_ctrl_block_handle_t pid_block_left = init_pid(PID_LEFT);
+    pid_ctrl_block_handle_t pid_block_right = init_pid(PID_RIGHT);
+    pcnt_unit_handle_t encoder_unit_left = init_encoder(ENC_LEFT);
+    pcnt_unit_handle_t encoder_unit_right = init_encoder(ENC_RIGHT);
+
+    while(1){
+        pid_calculate(encoder_unit_left, pid_block_left, encoder_unit_right, pid_block_right);
+    }
+   
 }
 
 esp_err_t create_tasks() {
 
-    ESP_ERROR_CHECK(i2c_slave_init());
-
-    i2c_write_queue = xQueueCreate(10, I2C_SLAVE_TX_BUF_LEN);
-
     // Task 1 (core 0): read + write data
-    //xTaskCreatePinnedToCore(i2c_task_com, "i2c_task_com", 2048, NULL, 5, NULL, 0);
+    xTaskCreatePinnedToCore(i2c_task_com, "i2c_task_com", 2048, NULL, 5, NULL, 0);
 
     // Task 2 (core 1): control 
     xTaskCreatePinnedToCore(task_motor_control, "task_motor_control", 2048, NULL, 5, NULL, 1);

@@ -1,0 +1,5 @@
+<launch>
+    <!-- Start the I2C node for encoder communication -->
+    <node name="i2c_master" pkg="robot_control" type="i2c_master.py" /> 
+
+</launch>
