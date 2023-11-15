@@ -21,6 +21,14 @@
 #include "robot_control/encoder_data.h"
 #include "robot_control/velocity_data.h"
 
+//Define max encoder data
+#define MAX_ENCODER_TICKS 
+
+#define MU 1
+#define PI 3.14159
+#define RES 1150.0 //Convertions constant
+#define ENC_RES 2 * PI / RES
+
 
 enum MotorPosition
 {
