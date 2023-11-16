@@ -4,7 +4,7 @@
     <node name="i2c_master" pkg="robot_control" type="i2c_master.py" /> 
 
     <!-- Load robot model-->
-   <!-- <param name="robot_description" command="$(find xacro)/xacro $(arg model)"/> -->
+    <param name="robot_description" command="$(find V6)/urdf/V6.urdf $(arg model)"/>
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /> 
 
     <!-- Load controller settings -->
@@ -23,10 +23,10 @@
     <!-- Controller Manager 
     joints_update configures a JointStateController 
     mobile_base_controller configures a DiffDriveController -->
-    <!--<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"
         args="
             /joints_update
             /mobile_base_controller">
-    </node>-->
+    </node>
 
 </launch>   
