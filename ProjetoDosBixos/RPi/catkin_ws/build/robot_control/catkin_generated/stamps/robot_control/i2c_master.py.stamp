@@ -40,14 +40,18 @@ class I2CCommunication:
     def read_data(self):
         try:
             data = self.i2c.read_i2c_block_data(self.device_address, REG_ADDRESS, 8)  # Faz a leitura da ESP32
-            value_right, value_left = struct.unpack('!ii', bytes(data[:3]), bytes(data[3:]))  # Desempacota as informações recebidas
 
-            rospy.loginfo(f'Valor lido: {value_left}, {value_right}')
+            value_right = struct.unpack('!i', bytes(data[:4])) 
+            value_left = struct.unpack('!i', bytes(data[4:])) 
 
-            self.left_encoder_data = value_left
-            self.right_encoder_data = value_right
+            #rospy.loginfo(f'Valor lido: {value_left}, {value_right}')
 
-            self.pub_encoder.publish(self.encoder_msg)
+            enc_msg = encoder_data()
+
+            enc_msg.left_encoder_data = value_left[0]
+            enc_msg.right_encoder_data = value_right[0]
+
+            self.pub_encoder.publish(enc_msg)
 
         except Exception as e:
             rospy.logerr(f"Erro na leitura: {str(e)}")
@@ -56,13 +60,13 @@ class I2CCommunication:
     def write_data(self):
         try:
 
-            a = 22
-            b = 22
+            a = 50
+            b = 50
 
             data = struct.pack('!ii', a, b)  # "Empacota" o valor mandado como parâmetro da função
             self.i2c.write_i2c_block_data(self.device_address, REG_ADDRESS, list(data))  # Escreve valor para a ESP32
             
-            rospy.loginfo(f'Valor enviado: {self.left_wheel_velocity}, {self.right_wheel_velocity}')
+            #rospy.loginfo(f'Valor enviado: {self.left_wheel_velocity}, {self.right_wheel_velocity}')
 
         except Exception as e:
             rospy.logerr(f"Erro na escrita: {str(e)}")
@@ -86,7 +90,7 @@ class I2CCommunication:
 
         while not rospy.is_shutdown():
             self.read_data()
-            #self.write_data()
+            self.write_data()
 
             rate.sleep()
 

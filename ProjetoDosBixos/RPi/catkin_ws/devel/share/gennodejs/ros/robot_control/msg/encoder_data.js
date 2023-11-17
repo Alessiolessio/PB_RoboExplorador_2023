@@ -26,13 +26,13 @@ class encoder_data {
         this.left_encoder_data = initObj.left_encoder_data
       }
       else {
-        this.left_encoder_data = 0.0;
+        this.left_encoder_data = 0;
       }
       if (initObj.hasOwnProperty('right_encoder_data')) {
         this.right_encoder_data = initObj.right_encoder_data
       }
       else {
-        this.right_encoder_data = 0.0;
+        this.right_encoder_data = 0;
       }
     }
   }
@@ -40,9 +40,9 @@ class encoder_data {
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type encoder_data
     // Serialize message field [left_encoder_data]
-    bufferOffset = _serializer.float64(obj.left_encoder_data, buffer, bufferOffset);
+    bufferOffset = _serializer.int64(obj.left_encoder_data, buffer, bufferOffset);
     // Serialize message field [right_encoder_data]
-    bufferOffset = _serializer.float64(obj.right_encoder_data, buffer, bufferOffset);
+    bufferOffset = _serializer.int64(obj.right_encoder_data, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -51,9 +51,9 @@ class encoder_data {
     let len;
     let data = new encoder_data(null);
     // Deserialize message field [left_encoder_data]
-    data.left_encoder_data = _deserializer.float64(buffer, bufferOffset);
+    data.left_encoder_data = _deserializer.int64(buffer, bufferOffset);
     // Deserialize message field [right_encoder_data]
-    data.right_encoder_data = _deserializer.float64(buffer, bufferOffset);
+    data.right_encoder_data = _deserializer.int64(buffer, bufferOffset);
     return data;
   }
 
@@ -68,7 +68,7 @@ class encoder_data {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'e8a513d02103e6ca180cd050ef8b19c8';
+    return '1276b5c4b2bbf74e766582a5b67bb9b6';
   }
 
   static messageDefinition() {
@@ -76,8 +76,8 @@ class encoder_data {
     return `
     # encoder_data.msg
     
-    float64 left_encoder_data
-    float64 right_encoder_data
+    int64 left_encoder_data
+    int64 right_encoder_data
     `;
   }
 
@@ -91,14 +91,14 @@ class encoder_data {
       resolved.left_encoder_data = msg.left_encoder_data;
     }
     else {
-      resolved.left_encoder_data = 0.0
+      resolved.left_encoder_data = 0
     }
 
     if (msg.right_encoder_data !== undefined) {
       resolved.right_encoder_data = msg.right_encoder_data;
     }
     else {
-      resolved.right_encoder_data = 0.0
+      resolved.right_encoder_data = 0
     }
 
     return resolved;

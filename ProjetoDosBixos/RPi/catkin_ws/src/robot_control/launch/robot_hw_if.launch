@@ -1,5 +1,7 @@
 <launch>
-    <!-- Start the I2C node for encoder communication -->
+   <!-- <arg name="model" default="$(find robot_description)/urdf/trekking2023.urdf.xacro"/> -->
+
     <node name="i2c_master" pkg="robot_control" type="i2c_master.py" /> 
 
-</launch>
+
+</launch>   

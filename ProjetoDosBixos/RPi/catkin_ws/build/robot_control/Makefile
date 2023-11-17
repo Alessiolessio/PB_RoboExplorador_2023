@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build
+CMAKE_BINARY_DIR = /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -137,14 +137,14 @@ test/fast: test
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/CMakeFiles /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_control/CMakeFiles/progress.marks
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/CMakeFiles 0
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/CMakeFiles /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_control/CMakeFiles/progress.marks
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/clean
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/clean
 .PHONY : clean
 
 # The main clean target
@@ -154,22 +154,37 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/preinstall
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/preinstall
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
+robot_control/CMakeFiles/robot_hw_interface_node.dir/rule:
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_hw_interface_node.dir/rule
+.PHONY : robot_control/CMakeFiles/robot_hw_interface_node.dir/rule
+
+# Convenience name for target.
+robot_hw_interface_node: robot_control/CMakeFiles/robot_hw_interface_node.dir/rule
+
+.PHONY : robot_hw_interface_node
+
+# fast build rule for target.
+robot_hw_interface_node/fast:
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_hw_interface_node.dir/build.make robot_control/CMakeFiles/robot_hw_interface_node.dir/build
+.PHONY : robot_hw_interface_node/fast
+
+# Convenience name for target.
 robot_control/CMakeFiles/robot_control_genpy.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_control_genpy.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_control_genpy.dir/rule
 .PHONY : robot_control/CMakeFiles/robot_control_genpy.dir/rule
 
 # Convenience name for target.
@@ -179,12 +194,12 @@ robot_control_genpy: robot_control/CMakeFiles/robot_control_genpy.dir/rule
 
 # fast build rule for target.
 robot_control_genpy/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_control_genpy.dir/build.make robot_control/CMakeFiles/robot_control_genpy.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_control_genpy.dir/build.make robot_control/CMakeFiles/robot_control_genpy.dir/build
 .PHONY : robot_control_genpy/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/robot_control_generate_messages_py.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_control_generate_messages_py.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_control_generate_messages_py.dir/rule
 .PHONY : robot_control/CMakeFiles/robot_control_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -194,12 +209,12 @@ robot_control_generate_messages_py: robot_control/CMakeFiles/robot_control_gener
 
 # fast build rule for target.
 robot_control_generate_messages_py/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_control_generate_messages_py.dir/build.make robot_control/CMakeFiles/robot_control_generate_messages_py.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_control_generate_messages_py.dir/build.make robot_control/CMakeFiles/robot_control_generate_messages_py.dir/build
 .PHONY : robot_control_generate_messages_py/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/robot_control_generate_messages_nodejs.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_control_generate_messages_nodejs.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_control_generate_messages_nodejs.dir/rule
 .PHONY : robot_control/CMakeFiles/robot_control_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -209,12 +224,12 @@ robot_control_generate_messages_nodejs: robot_control/CMakeFiles/robot_control_g
 
 # fast build rule for target.
 robot_control_generate_messages_nodejs/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_control_generate_messages_nodejs.dir/build.make robot_control/CMakeFiles/robot_control_generate_messages_nodejs.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_control_generate_messages_nodejs.dir/build.make robot_control/CMakeFiles/robot_control_generate_messages_nodejs.dir/build
 .PHONY : robot_control_generate_messages_nodejs/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
 .PHONY : robot_control/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -224,12 +239,12 @@ rosgraph_msgs_generate_messages_lisp: robot_control/CMakeFiles/rosgraph_msgs_gen
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_lisp/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make robot_control/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make robot_control/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
 .PHONY : rosgraph_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
 .PHONY : robot_control/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -239,12 +254,12 @@ rosgraph_msgs_generate_messages_eus: robot_control/CMakeFiles/rosgraph_msgs_gene
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_eus/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make robot_control/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make robot_control/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
 .PHONY : rosgraph_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
 .PHONY : robot_control/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -254,12 +269,12 @@ std_msgs_generate_messages_cpp: robot_control/CMakeFiles/std_msgs_generate_messa
 
 # fast build rule for target.
 std_msgs_generate_messages_cpp/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make robot_control/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make robot_control/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
 .PHONY : std_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
 .PHONY : robot_control/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -269,12 +284,12 @@ roscpp_generate_messages_nodejs: robot_control/CMakeFiles/roscpp_generate_messag
 
 # fast build rule for target.
 roscpp_generate_messages_nodejs/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make robot_control/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make robot_control/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
 .PHONY : roscpp_generate_messages_nodejs/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/std_msgs_generate_messages_eus.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
 .PHONY : robot_control/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -284,12 +299,12 @@ std_msgs_generate_messages_eus: robot_control/CMakeFiles/std_msgs_generate_messa
 
 # fast build rule for target.
 std_msgs_generate_messages_eus/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make robot_control/CMakeFiles/std_msgs_generate_messages_eus.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make robot_control/CMakeFiles/std_msgs_generate_messages_eus.dir/build
 .PHONY : std_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
 .PHONY : robot_control/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -299,12 +314,12 @@ std_msgs_generate_messages_lisp: robot_control/CMakeFiles/std_msgs_generate_mess
 
 # fast build rule for target.
 std_msgs_generate_messages_lisp/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make robot_control/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make robot_control/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
 .PHONY : std_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
 .PHONY : robot_control/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -314,12 +329,12 @@ rosgraph_msgs_generate_messages_nodejs: robot_control/CMakeFiles/rosgraph_msgs_g
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_nodejs/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make robot_control/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make robot_control/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
 .PHONY : rosgraph_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/robot_control_gennodejs.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_control_gennodejs.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_control_gennodejs.dir/rule
 .PHONY : robot_control/CMakeFiles/robot_control_gennodejs.dir/rule
 
 # Convenience name for target.
@@ -329,12 +344,12 @@ robot_control_gennodejs: robot_control/CMakeFiles/robot_control_gennodejs.dir/ru
 
 # fast build rule for target.
 robot_control_gennodejs/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_control_gennodejs.dir/build.make robot_control/CMakeFiles/robot_control_gennodejs.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_control_gennodejs.dir/build.make robot_control/CMakeFiles/robot_control_gennodejs.dir/build
 .PHONY : robot_control_gennodejs/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/roscpp_generate_messages_py.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/roscpp_generate_messages_py.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/roscpp_generate_messages_py.dir/rule
 .PHONY : robot_control/CMakeFiles/roscpp_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -344,12 +359,12 @@ roscpp_generate_messages_py: robot_control/CMakeFiles/roscpp_generate_messages_p
 
 # fast build rule for target.
 roscpp_generate_messages_py/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/roscpp_generate_messages_py.dir/build.make robot_control/CMakeFiles/roscpp_generate_messages_py.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/roscpp_generate_messages_py.dir/build.make robot_control/CMakeFiles/roscpp_generate_messages_py.dir/build
 .PHONY : roscpp_generate_messages_py/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/controller_manager_msgs_generate_messages_lisp.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/controller_manager_msgs_generate_messages_lisp.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/controller_manager_msgs_generate_messages_lisp.dir/rule
 .PHONY : robot_control/CMakeFiles/controller_manager_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -359,12 +374,12 @@ controller_manager_msgs_generate_messages_lisp: robot_control/CMakeFiles/control
 
 # fast build rule for target.
 controller_manager_msgs_generate_messages_lisp/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/controller_manager_msgs_generate_messages_lisp.dir/build.make robot_control/CMakeFiles/controller_manager_msgs_generate_messages_lisp.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/controller_manager_msgs_generate_messages_lisp.dir/build.make robot_control/CMakeFiles/controller_manager_msgs_generate_messages_lisp.dir/build
 .PHONY : controller_manager_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/roscpp_generate_messages_eus.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/roscpp_generate_messages_eus.dir/rule
 .PHONY : robot_control/CMakeFiles/roscpp_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -374,12 +389,12 @@ roscpp_generate_messages_eus: robot_control/CMakeFiles/roscpp_generate_messages_
 
 # fast build rule for target.
 roscpp_generate_messages_eus/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/roscpp_generate_messages_eus.dir/build.make robot_control/CMakeFiles/roscpp_generate_messages_eus.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/roscpp_generate_messages_eus.dir/build.make robot_control/CMakeFiles/roscpp_generate_messages_eus.dir/build
 .PHONY : roscpp_generate_messages_eus/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
 .PHONY : robot_control/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -389,12 +404,12 @@ roscpp_generate_messages_cpp: robot_control/CMakeFiles/roscpp_generate_messages_
 
 # fast build rule for target.
 roscpp_generate_messages_cpp/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make robot_control/CMakeFiles/roscpp_generate_messages_cpp.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make robot_control/CMakeFiles/roscpp_generate_messages_cpp.dir/build
 .PHONY : roscpp_generate_messages_cpp/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
 .PHONY : robot_control/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -404,12 +419,12 @@ std_msgs_generate_messages_nodejs: robot_control/CMakeFiles/std_msgs_generate_me
 
 # fast build rule for target.
 std_msgs_generate_messages_nodejs/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make robot_control/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make robot_control/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
 .PHONY : std_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/robot_control_generate_messages.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_control_generate_messages.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_control_generate_messages.dir/rule
 .PHONY : robot_control/CMakeFiles/robot_control_generate_messages.dir/rule
 
 # Convenience name for target.
@@ -419,12 +434,12 @@ robot_control_generate_messages: robot_control/CMakeFiles/robot_control_generate
 
 # fast build rule for target.
 robot_control_generate_messages/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_control_generate_messages.dir/build.make robot_control/CMakeFiles/robot_control_generate_messages.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_control_generate_messages.dir/build.make robot_control/CMakeFiles/robot_control_generate_messages.dir/build
 .PHONY : robot_control_generate_messages/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/_robot_control_generate_messages_check_deps_velocity_data.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/_robot_control_generate_messages_check_deps_velocity_data.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/_robot_control_generate_messages_check_deps_velocity_data.dir/rule
 .PHONY : robot_control/CMakeFiles/_robot_control_generate_messages_check_deps_velocity_data.dir/rule
 
 # Convenience name for target.
@@ -434,12 +449,12 @@ _robot_control_generate_messages_check_deps_velocity_data: robot_control/CMakeFi
 
 # fast build rule for target.
 _robot_control_generate_messages_check_deps_velocity_data/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/_robot_control_generate_messages_check_deps_velocity_data.dir/build.make robot_control/CMakeFiles/_robot_control_generate_messages_check_deps_velocity_data.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/_robot_control_generate_messages_check_deps_velocity_data.dir/build.make robot_control/CMakeFiles/_robot_control_generate_messages_check_deps_velocity_data.dir/build
 .PHONY : _robot_control_generate_messages_check_deps_velocity_data/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/robot_control_gencpp.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_control_gencpp.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_control_gencpp.dir/rule
 .PHONY : robot_control/CMakeFiles/robot_control_gencpp.dir/rule
 
 # Convenience name for target.
@@ -449,12 +464,12 @@ robot_control_gencpp: robot_control/CMakeFiles/robot_control_gencpp.dir/rule
 
 # fast build rule for target.
 robot_control_gencpp/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_control_gencpp.dir/build.make robot_control/CMakeFiles/robot_control_gencpp.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_control_gencpp.dir/build.make robot_control/CMakeFiles/robot_control_gencpp.dir/build
 .PHONY : robot_control_gencpp/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/std_msgs_generate_messages_py.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/std_msgs_generate_messages_py.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/std_msgs_generate_messages_py.dir/rule
 .PHONY : robot_control/CMakeFiles/std_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -464,12 +479,12 @@ std_msgs_generate_messages_py: robot_control/CMakeFiles/std_msgs_generate_messag
 
 # fast build rule for target.
 std_msgs_generate_messages_py/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/std_msgs_generate_messages_py.dir/build.make robot_control/CMakeFiles/std_msgs_generate_messages_py.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/std_msgs_generate_messages_py.dir/build.make robot_control/CMakeFiles/std_msgs_generate_messages_py.dir/build
 .PHONY : std_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/controller_manager_msgs_generate_messages_cpp.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/controller_manager_msgs_generate_messages_cpp.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/controller_manager_msgs_generate_messages_cpp.dir/rule
 .PHONY : robot_control/CMakeFiles/controller_manager_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -479,12 +494,12 @@ controller_manager_msgs_generate_messages_cpp: robot_control/CMakeFiles/controll
 
 # fast build rule for target.
 controller_manager_msgs_generate_messages_cpp/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/controller_manager_msgs_generate_messages_cpp.dir/build.make robot_control/CMakeFiles/controller_manager_msgs_generate_messages_cpp.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/controller_manager_msgs_generate_messages_cpp.dir/build.make robot_control/CMakeFiles/controller_manager_msgs_generate_messages_cpp.dir/build
 .PHONY : controller_manager_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
 .PHONY : robot_control/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -494,12 +509,12 @@ rosgraph_msgs_generate_messages_cpp: robot_control/CMakeFiles/rosgraph_msgs_gene
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_cpp/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make robot_control/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make robot_control/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
 .PHONY : rosgraph_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/controller_manager_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/controller_manager_msgs_generate_messages_nodejs.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/controller_manager_msgs_generate_messages_nodejs.dir/rule
 .PHONY : robot_control/CMakeFiles/controller_manager_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -509,12 +524,12 @@ controller_manager_msgs_generate_messages_nodejs: robot_control/CMakeFiles/contr
 
 # fast build rule for target.
 controller_manager_msgs_generate_messages_nodejs/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/controller_manager_msgs_generate_messages_nodejs.dir/build.make robot_control/CMakeFiles/controller_manager_msgs_generate_messages_nodejs.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/controller_manager_msgs_generate_messages_nodejs.dir/build.make robot_control/CMakeFiles/controller_manager_msgs_generate_messages_nodejs.dir/build
 .PHONY : controller_manager_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
 .PHONY : robot_control/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -524,12 +539,12 @@ rosgraph_msgs_generate_messages_py: robot_control/CMakeFiles/rosgraph_msgs_gener
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_py/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make robot_control/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make robot_control/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
 .PHONY : rosgraph_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/robot_control_genlisp.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_control_genlisp.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_control_genlisp.dir/rule
 .PHONY : robot_control/CMakeFiles/robot_control_genlisp.dir/rule
 
 # Convenience name for target.
@@ -539,12 +554,12 @@ robot_control_genlisp: robot_control/CMakeFiles/robot_control_genlisp.dir/rule
 
 # fast build rule for target.
 robot_control_genlisp/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_control_genlisp.dir/build.make robot_control/CMakeFiles/robot_control_genlisp.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_control_genlisp.dir/build.make robot_control/CMakeFiles/robot_control_genlisp.dir/build
 .PHONY : robot_control_genlisp/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/controller_manager_msgs_generate_messages_py.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/controller_manager_msgs_generate_messages_py.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/controller_manager_msgs_generate_messages_py.dir/rule
 .PHONY : robot_control/CMakeFiles/controller_manager_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -554,12 +569,12 @@ controller_manager_msgs_generate_messages_py: robot_control/CMakeFiles/controlle
 
 # fast build rule for target.
 controller_manager_msgs_generate_messages_py/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/controller_manager_msgs_generate_messages_py.dir/build.make robot_control/CMakeFiles/controller_manager_msgs_generate_messages_py.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/controller_manager_msgs_generate_messages_py.dir/build.make robot_control/CMakeFiles/controller_manager_msgs_generate_messages_py.dir/build
 .PHONY : controller_manager_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/robot_control_generate_messages_lisp.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_control_generate_messages_lisp.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_control_generate_messages_lisp.dir/rule
 .PHONY : robot_control/CMakeFiles/robot_control_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -569,12 +584,12 @@ robot_control_generate_messages_lisp: robot_control/CMakeFiles/robot_control_gen
 
 # fast build rule for target.
 robot_control_generate_messages_lisp/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_control_generate_messages_lisp.dir/build.make robot_control/CMakeFiles/robot_control_generate_messages_lisp.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_control_generate_messages_lisp.dir/build.make robot_control/CMakeFiles/robot_control_generate_messages_lisp.dir/build
 .PHONY : robot_control_generate_messages_lisp/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/roscpp_generate_messages_lisp.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
 .PHONY : robot_control/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -584,12 +599,12 @@ roscpp_generate_messages_lisp: robot_control/CMakeFiles/roscpp_generate_messages
 
 # fast build rule for target.
 roscpp_generate_messages_lisp/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make robot_control/CMakeFiles/roscpp_generate_messages_lisp.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make robot_control/CMakeFiles/roscpp_generate_messages_lisp.dir/build
 .PHONY : roscpp_generate_messages_lisp/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/controller_manager_msgs_generate_messages_eus.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/controller_manager_msgs_generate_messages_eus.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/controller_manager_msgs_generate_messages_eus.dir/rule
 .PHONY : robot_control/CMakeFiles/controller_manager_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -599,12 +614,12 @@ controller_manager_msgs_generate_messages_eus: robot_control/CMakeFiles/controll
 
 # fast build rule for target.
 controller_manager_msgs_generate_messages_eus/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/controller_manager_msgs_generate_messages_eus.dir/build.make robot_control/CMakeFiles/controller_manager_msgs_generate_messages_eus.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/controller_manager_msgs_generate_messages_eus.dir/build.make robot_control/CMakeFiles/controller_manager_msgs_generate_messages_eus.dir/build
 .PHONY : controller_manager_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/_robot_control_generate_messages_check_deps_encoder_data.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/_robot_control_generate_messages_check_deps_encoder_data.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/_robot_control_generate_messages_check_deps_encoder_data.dir/rule
 .PHONY : robot_control/CMakeFiles/_robot_control_generate_messages_check_deps_encoder_data.dir/rule
 
 # Convenience name for target.
@@ -614,12 +629,12 @@ _robot_control_generate_messages_check_deps_encoder_data: robot_control/CMakeFil
 
 # fast build rule for target.
 _robot_control_generate_messages_check_deps_encoder_data/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/_robot_control_generate_messages_check_deps_encoder_data.dir/build.make robot_control/CMakeFiles/_robot_control_generate_messages_check_deps_encoder_data.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/_robot_control_generate_messages_check_deps_encoder_data.dir/build.make robot_control/CMakeFiles/_robot_control_generate_messages_check_deps_encoder_data.dir/build
 .PHONY : _robot_control_generate_messages_check_deps_encoder_data/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/robot_control_generate_messages_cpp.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_control_generate_messages_cpp.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_control_generate_messages_cpp.dir/rule
 .PHONY : robot_control/CMakeFiles/robot_control_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -629,12 +644,12 @@ robot_control_generate_messages_cpp: robot_control/CMakeFiles/robot_control_gene
 
 # fast build rule for target.
 robot_control_generate_messages_cpp/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_control_generate_messages_cpp.dir/build.make robot_control/CMakeFiles/robot_control_generate_messages_cpp.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_control_generate_messages_cpp.dir/build.make robot_control/CMakeFiles/robot_control_generate_messages_cpp.dir/build
 .PHONY : robot_control_generate_messages_cpp/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/robot_control_generate_messages_eus.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_control_generate_messages_eus.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_control_generate_messages_eus.dir/rule
 .PHONY : robot_control/CMakeFiles/robot_control_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -644,12 +659,12 @@ robot_control_generate_messages_eus: robot_control/CMakeFiles/robot_control_gene
 
 # fast build rule for target.
 robot_control_generate_messages_eus/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_control_generate_messages_eus.dir/build.make robot_control/CMakeFiles/robot_control_generate_messages_eus.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_control_generate_messages_eus.dir/build.make robot_control/CMakeFiles/robot_control_generate_messages_eus.dir/build
 .PHONY : robot_control_generate_messages_eus/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/robot_control_geneus.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_control_geneus.dir/rule
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_control_geneus.dir/rule
 .PHONY : robot_control/CMakeFiles/robot_control_geneus.dir/rule
 
 # Convenience name for target.
@@ -659,8 +674,35 @@ robot_control_geneus: robot_control/CMakeFiles/robot_control_geneus.dir/rule
 
 # fast build rule for target.
 robot_control_geneus/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_control_geneus.dir/build.make robot_control/CMakeFiles/robot_control_geneus.dir/build
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_control_geneus.dir/build.make robot_control/CMakeFiles/robot_control_geneus.dir/build
 .PHONY : robot_control_geneus/fast
+
+src/robot_hw_interface.o: src/robot_hw_interface.cpp.o
+
+.PHONY : src/robot_hw_interface.o
+
+# target to build an object file
+src/robot_hw_interface.cpp.o:
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_hw_interface_node.dir/build.make robot_control/CMakeFiles/robot_hw_interface_node.dir/src/robot_hw_interface.cpp.o
+.PHONY : src/robot_hw_interface.cpp.o
+
+src/robot_hw_interface.i: src/robot_hw_interface.cpp.i
+
+.PHONY : src/robot_hw_interface.i
+
+# target to preprocess a source file
+src/robot_hw_interface.cpp.i:
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_hw_interface_node.dir/build.make robot_control/CMakeFiles/robot_hw_interface_node.dir/src/robot_hw_interface.cpp.i
+.PHONY : src/robot_hw_interface.cpp.i
+
+src/robot_hw_interface.s: src/robot_hw_interface.cpp.s
+
+.PHONY : src/robot_hw_interface.s
+
+# target to generate assembly for a file
+src/robot_hw_interface.cpp.s:
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_hw_interface_node.dir/build.make robot_control/CMakeFiles/robot_hw_interface_node.dir/src/robot_hw_interface.cpp.s
+.PHONY : src/robot_hw_interface.cpp.s
 
 # Help Target
 help:
@@ -671,6 +713,7 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... edit_cache"
+	@echo "... robot_hw_interface_node"
 	@echo "... robot_control_genpy"
 	@echo "... robot_control_generate_messages_py"
 	@echo "... robot_control_generate_messages_nodejs"
@@ -708,6 +751,9 @@ help:
 	@echo "... robot_control_generate_messages_cpp"
 	@echo "... robot_control_generate_messages_eus"
 	@echo "... robot_control_geneus"
+	@echo "... src/robot_hw_interface.o"
+	@echo "... src/robot_hw_interface.i"
+	@echo "... src/robot_hw_interface.s"
 .PHONY : help
 
 
@@ -719,6 +765,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

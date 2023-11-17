@@ -24,21 +24,21 @@ struct encoder_data_
   typedef encoder_data_<ContainerAllocator> Type;
 
   encoder_data_()
-    : left_encoder_data(0.0)
-    , right_encoder_data(0.0)  {
+    : left_encoder_data(0)
+    , right_encoder_data(0)  {
     }
   encoder_data_(const ContainerAllocator& _alloc)
-    : left_encoder_data(0.0)
-    , right_encoder_data(0.0)  {
+    : left_encoder_data(0)
+    , right_encoder_data(0)  {
   (void)_alloc;
     }
 
 
 
-   typedef double _left_encoder_data_type;
+   typedef int64_t _left_encoder_data_type;
   _left_encoder_data_type left_encoder_data;
 
-   typedef double _right_encoder_data_type;
+   typedef int64_t _right_encoder_data_type;
   _right_encoder_data_type right_encoder_data;
 
 
@@ -128,12 +128,12 @@ struct MD5Sum< ::robot_control::encoder_data_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "e8a513d02103e6ca180cd050ef8b19c8";
+    return "1276b5c4b2bbf74e766582a5b67bb9b6";
   }
 
   static const char* value(const ::robot_control::encoder_data_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xe8a513d02103e6caULL;
-  static const uint64_t static_value2 = 0x180cd050ef8b19c8ULL;
+  static const uint64_t static_value1 = 0x1276b5c4b2bbf74eULL;
+  static const uint64_t static_value2 = 0x766582a5b67bb9b6ULL;
 };
 
 template<class ContainerAllocator>
@@ -154,8 +154,8 @@ struct Definition< ::robot_control::encoder_data_<ContainerAllocator> >
   {
     return "# encoder_data.msg\n"
 "\n"
-"float64 left_encoder_data\n"
-"float64 right_encoder_data\n"
+"int64 left_encoder_data\n"
+"int64 right_encoder_data\n"
 ;
   }
 
@@ -195,9 +195,9 @@ struct Printer< ::robot_control::encoder_data_<ContainerAllocator> >
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::robot_control::encoder_data_<ContainerAllocator>& v)
   {
     s << indent << "left_encoder_data: ";
-    Printer<double>::stream(s, indent + "  ", v.left_encoder_data);
+    Printer<int64_t>::stream(s, indent + "  ", v.left_encoder_data);
     s << indent << "right_encoder_data: ";
-    Printer<double>::stream(s, indent + "  ", v.right_encoder_data);
+    Printer<int64_t>::stream(s, indent + "  ", v.right_encoder_data);
   }
 };
 

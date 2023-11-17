@@ -1,8 +1,8 @@
-# Install script for directory: /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src/robot_control
+# Install script for directory: /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src/robot_control
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -39,59 +39,59 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_control/msg" TYPE FILE FILES
-    "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src/robot_control/msg/encoder_data.msg"
-    "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src/robot_control/msg/velocity_data.msg"
+    "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src/robot_control/msg/encoder_data.msg"
+    "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src/robot_control/msg/velocity_data.msg"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_control/cmake" TYPE FILE FILES "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_control/catkin_generated/installspace/robot_control-msg-paths.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_control/cmake" TYPE FILE FILES "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_control/catkin_generated/installspace/robot_control-msg-paths.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/include/robot_control")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/include/robot_control")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/share/roseus/ros/robot_control")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/share/roseus/ros/robot_control")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common-lisp/ros" TYPE DIRECTORY FILES "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/share/common-lisp/ros/robot_control")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common-lisp/ros" TYPE DIRECTORY FILES "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/share/common-lisp/ros/robot_control")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gennodejs/ros" TYPE DIRECTORY FILES "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/share/gennodejs/ros/robot_control")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gennodejs/ros" TYPE DIRECTORY FILES "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/share/gennodejs/ros/robot_control")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  execute_process(COMMAND "/usr/bin/python3" -m compileall "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/lib/python3/dist-packages/robot_control")
+  execute_process(COMMAND "/usr/bin/python3" -m compileall "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/lib/python3/dist-packages/robot_control")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages" TYPE DIRECTORY FILES "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/lib/python3/dist-packages/robot_control")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages" TYPE DIRECTORY FILES "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/lib/python3/dist-packages/robot_control")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_control/catkin_generated/installspace/robot_control.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_control/catkin_generated/installspace/robot_control.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_control/cmake" TYPE FILE FILES "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_control/catkin_generated/installspace/robot_control-msg-extras.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_control/cmake" TYPE FILE FILES "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_control/catkin_generated/installspace/robot_control-msg-extras.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_control/cmake" TYPE FILE FILES
-    "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_control/catkin_generated/installspace/robot_controlConfig.cmake"
-    "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_control/catkin_generated/installspace/robot_controlConfig-version.cmake"
+    "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_control/catkin_generated/installspace/robot_controlConfig.cmake"
+    "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_control/catkin_generated/installspace/robot_controlConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_control" TYPE FILE FILES "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src/robot_control/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_control" TYPE FILE FILES "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src/robot_control/package.xml")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/robot_control" TYPE PROGRAM FILES "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_control/catkin_generated/installspace/i2c_master.py")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/robot_control" TYPE PROGRAM FILES "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_control/catkin_generated/installspace/i2c_master.py")
 endif()
 

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build
+CMAKE_BINARY_DIR = /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build
 
 # Utility rule file for robot_description_xacro_generated_to_devel_space_.
 
@@ -63,10 +63,10 @@ robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.d
 .PHONY : robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/build
 
 robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/clean:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_description && $(CMAKE_COMMAND) -P CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/cmake_clean.cmake
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_description && $(CMAKE_COMMAND) -P CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/cmake_clean.cmake
 .PHONY : robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/clean
 
 robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/depend:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src/robot_description /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_description /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src/robot_description /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_description /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/depend
 

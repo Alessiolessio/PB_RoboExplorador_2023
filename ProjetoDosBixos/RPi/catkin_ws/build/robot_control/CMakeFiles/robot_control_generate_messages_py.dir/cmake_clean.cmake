@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
-  "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/lib/python3/dist-packages/robot_control/msg/__init__.py"
-  "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/lib/python3/dist-packages/robot_control/msg/_encoder_data.py"
-  "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/lib/python3/dist-packages/robot_control/msg/_velocity_data.py"
+  "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/lib/python3/dist-packages/robot_control/msg/__init__.py"
+  "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/lib/python3/dist-packages/robot_control/msg/_encoder_data.py"
+  "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/lib/python3/dist-packages/robot_control/msg/_velocity_data.py"
   "CMakeFiles/robot_control_generate_messages_py"
 )
 

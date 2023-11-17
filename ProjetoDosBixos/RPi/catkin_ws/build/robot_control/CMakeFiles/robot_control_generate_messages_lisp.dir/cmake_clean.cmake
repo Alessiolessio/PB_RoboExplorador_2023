@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/share/common-lisp/ros/robot_control/msg/encoder_data.lisp"
-  "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/share/common-lisp/ros/robot_control/msg/velocity_data.lisp"
+  "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/share/common-lisp/ros/robot_control/msg/encoder_data.lisp"
+  "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/share/common-lisp/ros/robot_control/msg/velocity_data.lisp"
   "CMakeFiles/robot_control_generate_messages_lisp"
 )
 

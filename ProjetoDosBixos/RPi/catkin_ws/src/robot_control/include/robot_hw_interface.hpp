@@ -19,9 +19,14 @@
 
 #define HW_IF_UPDATE_FREQ 50
 
+#define MU 1
+#define PI 3.14159
+#define RES 1150.0 //Convertions constant
+#define ENC_RES 2 * PI / RES
+
 // Custom message includes
-//#include "robot_control/encoder_data.msg"
-//#include "robot_control/velocity_data.msg"
+#include "robot_control/encoder_data.h"
+#include "robot_control/velocity_data.h"
 
 
 enum MotorPosition
@@ -91,5 +96,7 @@ protected:
 
     // Controller manager for handling controllers
     boost::shared_ptr<controller_manager::ControllerManager> controller_manager_;
+
+};
 
 #endif // HW_INTERFACE_HPP

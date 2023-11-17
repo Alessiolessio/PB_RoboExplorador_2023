@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/include/robot_control/encoder_data.h"
-  "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/include/robot_control/velocity_data.h"
+  "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/include/robot_control/encoder_data.h"
+  "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/include/robot_control/velocity_data.h"
   "CMakeFiles/robot_control_generate_messages_cpp"
 )
 

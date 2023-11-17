@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build
+CMAKE_BINARY_DIR = /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build
 
 # Utility rule file for rosgraph_msgs_generate_messages_py.
 
@@ -63,10 +63,10 @@ robot_control/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build: rosgraph_
 .PHONY : robot_control/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
 
 robot_control/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/clean:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_control && $(CMAKE_COMMAND) -P CMakeFiles/rosgraph_msgs_generate_messages_py.dir/cmake_clean.cmake
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_control && $(CMAKE_COMMAND) -P CMakeFiles/rosgraph_msgs_generate_messages_py.dir/cmake_clean.cmake
 .PHONY : robot_control/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/clean
 
 robot_control/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/depend:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src/robot_control /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_control /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_control/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src/robot_control /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_control /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_control/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : robot_control/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/depend
 

@@ -1,8 +1,8 @@
-prefix=/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel
+prefix=/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel
 
 Name: robot_control
 Description: Description of robot_control
 Version: 0.0.0
-Cflags: -I/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/include
+Cflags: -I/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel/include
 Libs: -L${prefix}/lib 
 Requires: 

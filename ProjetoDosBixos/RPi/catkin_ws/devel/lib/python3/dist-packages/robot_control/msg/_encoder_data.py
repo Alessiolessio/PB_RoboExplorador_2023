@@ -8,15 +8,15 @@ import struct
 
 
 class encoder_data(genpy.Message):
-  _md5sum = "e8a513d02103e6ca180cd050ef8b19c8"
+  _md5sum = "1276b5c4b2bbf74e766582a5b67bb9b6"
   _type = "robot_control/encoder_data"
   _has_header = False  # flag to mark the presence of a Header object
   _full_text = """# encoder_data.msg
 
-float64 left_encoder_data
-float64 right_encoder_data"""
+int64 left_encoder_data
+int64 right_encoder_data"""
   __slots__ = ['left_encoder_data','right_encoder_data']
-  _slot_types = ['float64','float64']
+  _slot_types = ['int64','int64']
 
   def __init__(self, *args, **kwds):
     """
@@ -36,12 +36,12 @@ float64 right_encoder_data"""
       super(encoder_data, self).__init__(*args, **kwds)
       # message fields cannot be None, assign default values for those that are
       if self.left_encoder_data is None:
-        self.left_encoder_data = 0.
+        self.left_encoder_data = 0
       if self.right_encoder_data is None:
-        self.right_encoder_data = 0.
+        self.right_encoder_data = 0
     else:
-      self.left_encoder_data = 0.
-      self.right_encoder_data = 0.
+      self.left_encoder_data = 0
+      self.right_encoder_data = 0
 
   def _get_types(self):
     """
@@ -56,7 +56,7 @@ float64 right_encoder_data"""
     """
     try:
       _x = self
-      buff.write(_get_struct_2d().pack(_x.left_encoder_data, _x.right_encoder_data))
+      buff.write(_get_struct_2q().pack(_x.left_encoder_data, _x.right_encoder_data))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -72,7 +72,7 @@ float64 right_encoder_data"""
       _x = self
       start = end
       end += 16
-      (_x.left_encoder_data, _x.right_encoder_data,) = _get_struct_2d().unpack(str[start:end])
+      (_x.left_encoder_data, _x.right_encoder_data,) = _get_struct_2q().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -86,7 +86,7 @@ float64 right_encoder_data"""
     """
     try:
       _x = self
-      buff.write(_get_struct_2d().pack(_x.left_encoder_data, _x.right_encoder_data))
+      buff.write(_get_struct_2q().pack(_x.left_encoder_data, _x.right_encoder_data))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -103,7 +103,7 @@ float64 right_encoder_data"""
       _x = self
       start = end
       end += 16
-      (_x.left_encoder_data, _x.right_encoder_data,) = _get_struct_2d().unpack(str[start:end])
+      (_x.left_encoder_data, _x.right_encoder_data,) = _get_struct_2q().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -112,9 +112,9 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_2d = None
-def _get_struct_2d():
-    global _struct_2d
-    if _struct_2d is None:
-        _struct_2d = struct.Struct("<2d")
-    return _struct_2d
+_struct_2q = None
+def _get_struct_2q():
+    global _struct_2q
+    if _struct_2q is None:
+        _struct_2q = struct.Struct("<2q")
+    return _struct_2q

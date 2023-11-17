@@ -1,8 +1,8 @@
-# Install script for directory: /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src/robot_description
+# Install script for directory: /home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src/robot_description
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_description/catkin_generated/installspace/robot_description.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_description/catkin_generated/installspace/robot_description.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_description/cmake" TYPE FILE FILES
-    "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_description/catkin_generated/installspace/robot_descriptionConfig.cmake"
-    "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_description/catkin_generated/installspace/robot_descriptionConfig-version.cmake"
+    "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_description/catkin_generated/installspace/robot_descriptionConfig.cmake"
+    "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/robot_description/catkin_generated/installspace/robot_descriptionConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_description" TYPE FILE FILES "/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src/robot_description/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_description" TYPE FILE FILES "/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/src/robot_description/package.xml")
 endif()
 
