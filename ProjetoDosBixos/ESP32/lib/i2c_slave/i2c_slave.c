@@ -42,7 +42,7 @@ void i2c_read_task() {
     } 
     
     // "Unpacking" data values (left)
-    for(int i = 6; i < 9; i++){
+    for(int i = 6; i < 10; i++){
         read_value_l |= (rx_data[i] << 8 * ((READ_LEN_VALUE - 1) - i));
     } 
 
@@ -97,7 +97,7 @@ void i2c_task_com() {
         vTaskDelay(FREQ_COMMUNICATION / portTICK_PERIOD_MS);
         i2c_read_task();
         vTaskDelay(FREQ_COMMUNICATION / portTICK_PERIOD_MS);
-        i2c_write_task(ENCODER_READ_L, ENCODER_READ_R);
+        i2c_write_task(ENCODER_READ_R, ENCODER_READ_L);
     }
 }
 
@@ -113,6 +113,10 @@ void task_motor_control() {
 
     while(1){
         pid_calculate(encoder_unit_left, pid_block_left, encoder_unit_right, pid_block_right);
+        //update_motor(LEFT, 8192);
+        //update_motor(RIGHT, 8192);
+        //printf("Lidos: %d, %d\n", TARGET_VALUE_R, TARGET_VALUE_L);
+        //vTaskDelay(2*FREQ_COMMUNICATION / portTICK_PERIOD_MS);
     }
    
 }
@@ -120,10 +124,10 @@ void task_motor_control() {
 esp_err_t create_tasks() {
 
     // Task 1 (core 0): read + write data
-    xTaskCreatePinnedToCore(i2c_task_com, "i2c_task_com", 2048, NULL, 5, NULL, 0);
+    xTaskCreatePinnedToCore(i2c_task_com, "i2c_task_com", 4096, NULL, 5, NULL, 0);
 
     // Task 2 (core 1): control 
-    xTaskCreatePinnedToCore(task_motor_control, "task_motor_control", 2048, NULL, 5, NULL, 1);
+    xTaskCreatePinnedToCore(task_motor_control, "task_motor_control", 4096, NULL, 1, NULL, 1);
 
     return ESP_OK;
 }

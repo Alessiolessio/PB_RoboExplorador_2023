@@ -56,6 +56,8 @@ add_message_files(
   velocity_data.msg
 )
 
+
+
 ## Generate services in the 'srv' folder
 # add_service_files(
 #   FILES
@@ -137,6 +139,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/robot_control_node.cpp)
+add_executable(robot_hw_interface_node src/robot_hw_interface.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -152,6 +155,10 @@ include_directories(
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
+
+target_link_libraries(robot_hw_interface_node
+  ${catkin_LIBRARIES}
+)
 
 
 #############
@@ -173,6 +180,8 @@ include_directories(
 # install(TARGETS ${PROJECT_NAME}_node
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 # )
+
+
 
 ## Mark libraries for installation
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_libraries.html

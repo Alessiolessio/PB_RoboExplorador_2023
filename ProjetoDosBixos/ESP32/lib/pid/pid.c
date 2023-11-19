@@ -32,6 +32,8 @@ esp_err_t pid_calculate(pcnt_unit_handle_t upcnt_unit_L, pid_ctrl_block_handle_t
   float target_LEFT = TARGET_VALUE_L;
   float target_RIGHT = TARGET_VALUE_R;
 
+  printf("Lidos: %d, %d\n", TARGET_VALUE_R, TARGET_VALUE_L);
+
   // while(!FLAG_TARGET){
 
   //   float ENCODER_READ_L = pulse_count(upcnt_unit_L) * 0.02;
@@ -65,15 +67,15 @@ esp_err_t pid_calculate(pcnt_unit_handle_t upcnt_unit_L, pid_ctrl_block_handle_t
 
   for(int i = 0; i < 10; i++){
 
-    ENCODER_READ_L = pulse_count(upcnt_unit_L) * 0.02;
-    ENCODER_READ_R = pulse_count(upcnt_unit_R) * 0.02;
+    ENCODER_READ_L = pulse_count(upcnt_unit_L);
+    ENCODER_READ_R = pulse_count(upcnt_unit_R);
 
     //Recalculate an error
     //ESP_LOGI(TAG_PID, "Velocidade inicial ESQUERDA: %f", ENCODER_READ_L);
     //ESP_LOGI(TAG_PID, "Velocidade inicial DIREITA: %f", ENCODER_READ_R);
 
-    float error_motor_LEFT = (target_LEFT - ENCODER_READ_L);
-    float error_motor_RIGHT = (target_RIGHT - ENCODER_READ_R);
+    float error_motor_LEFT = (target_LEFT - (ENCODER_READ_L * 0.02));
+    float error_motor_RIGHT = (target_RIGHT - (ENCODER_READ_R * 0.02));
 
     //ESP_LOGI(TAG_PID, "Erro ESQUERDA: %f", error_motor_LEFT);
     //ESP_LOGI(TAG_PID, "Erro DIREITA: %f", error_motor_RIGHT);

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="V6">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.030827 -0.00030185 0.031063"
+        rpy="0 0 0" />
+      <mass
+        value="0.9951" />
+      <inertia
+        ixx="0.001566"
+        ixy="5.223E-08"
+        ixz="-5.6055E-07"
+        iyy="0.0014474"
+        iyz="-1.8035E-06"
+        izz="0.0026424" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://V6/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 0.69804 0.69804 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://V6/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="RE">
+    <inertial>
+      <origin
+        xyz="1.0408E-17 -0.028826 2.3539E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.27834" />
+      <inertia
+        ixx="0.00019487"
+        ixy="7.2568E-21"
+        ixz="-6.7763E-21"
+        iyy="0.00032312"
+        iyz="-1.1826E-09"
+        izz="0.00019487" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://V6/meshes/RE.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.2 0.2 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://V6/meshes/RE.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RE_joint"
+    type="fixed">
+    <origin
+      xyz="0.0074375 -0.092 0.0235"
+      rpy="0 -0.99692 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="RE" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="RD">
+    <inertial>
+      <origin
+        xyz="-3.1225E-17 -0.028826 2.3539E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.27834" />
+      <inertia
+        ixx="0.00019487"
+        ixy="1.3653E-20"
+        ixz="-2.7105E-20"
+        iyy="0.00032312"
+        iyz="-1.1826E-09"
+        izz="0.00019487" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://V6/meshes/RD.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.2 0.2 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://V6/meshes/RD.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RD_joint"
+    type="fixed">
+    <origin
+      xyz="0.0075005 0.092 0.0235"
+      rpy="0 0.84537 -3.1416" />
+    <parent
+      link="base_link" />
+    <child
+      link="RD" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+
+
+    <gazebo>
+        <plugin name="differential_drive_controller"
+        filename="libgazebo_ros_diff_drive.so">
+            <leftJoint>RE_joint</leftJoint>
+            <rightJoint>RD_joint</rightJoint>
+            <robotBaseFrame>base_link</robotBaseFrame>
+            <wheelSeparation>0.25</wheelSeparation>
+            <wheelDiameter>0.07</wheelDiameter>
+            <publishWheelJointState>true</publishWheelJointState>
+        </plugin>
+    </gazebo>
+
+    <gazebo>
+        <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
+            <jointName>RD_joint,RE_joint</jointName>
+        </plugin>
+    </gazebo>
+
+</robot>
+

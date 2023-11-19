@@ -50,7 +50,7 @@ class I2CCommunication:
             self.pub_encoder.publish(self.encoder_msg)
 
         except Exception as e:
-            rospy.logerr(f"Erro na leitura: {str(e)}")
+            #rospy.logerr(f"Erro na leitura: {str(e)}")
             return None
 
     def write_data(self):
@@ -72,10 +72,10 @@ class I2CCommunication:
         joint_msg = velocity_data()
         joint_msg = msg
 
-        if joint_msg is not None and joint_msg.front_left_velocity != 0.0:
+        if joint_msg is not None and joint_msg.left_wheel_velocity != 0.0:
 
-            self.left_wheel_velocity = int(joint_msg.front_left_velocity * 100)
-            self.right_wheel_velocity = int(joint_msg.front_right_velocity * 100)
+            self.left_wheel_velocity = int(joint_msg.left_wheel_velocity * 100)
+            self.right_wheel_velocity = int(joint_msg.right_wheel_velocity * 100)
 
         else:
             return None

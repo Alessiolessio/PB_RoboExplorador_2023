@@ -510,12 +510,6 @@ four_wheel_steering_controller_SOURCE_DIR:STATIC=/home/math/Documentos/pb_2023/P
 //The directory containing a CMake configuration file for four_wheel_steering_msgs.
 four_wheel_steering_msgs_DIR:PATH=/opt/ros/noetic/share/four_wheel_steering_msgs/cmake
 
-//The directory containing a CMake configuration file for gazebo_msgs.
-gazebo_msgs_DIR:PATH=/opt/ros/noetic/share/gazebo_msgs/cmake
-
-//The directory containing a CMake configuration file for gazebo_ros.
-gazebo_ros_DIR:PATH=/opt/ros/noetic/share/gazebo_ros/cmake
-
 //The directory containing a CMake configuration file for gencpp.
 gencpp_DIR:PATH=/opt/ros/noetic/share/gencpp/cmake
 
@@ -693,6 +687,9 @@ rosgraph_DIR:PATH=/opt/ros/noetic/share/rosgraph/cmake
 
 //The directory containing a CMake configuration file for rosgraph_msgs.
 rosgraph_msgs_DIR:PATH=/opt/ros/noetic/share/rosgraph_msgs/cmake
+
+//The directory containing a CMake configuration file for roslaunch.
+roslaunch_DIR:PATH=/opt/ros/noetic/share/roslaunch/cmake
 
 //The directory containing a CMake configuration file for roslib.
 roslib_DIR:PATH=/opt/ros/noetic/share/roslib/cmake
