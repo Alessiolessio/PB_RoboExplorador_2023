@@ -1,2 +1,0 @@
-robot_control:robot_description
--DCATKIN_DEVEL_PREFIX=/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/ubuntu/PB_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/install -G Unix Makefiles
