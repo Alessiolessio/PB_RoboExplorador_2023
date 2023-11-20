@@ -7,3 +7,5 @@
 build/
 devel/
 
+RPi/build/
+RPi/devel/
