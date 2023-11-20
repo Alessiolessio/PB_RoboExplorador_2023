@@ -168,19 +168,19 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-robot_control/CMakeFiles/robot_hw_interface_node.dir/rule:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_hw_interface_node.dir/rule
-.PHONY : robot_control/CMakeFiles/robot_hw_interface_node.dir/rule
+robot_control/CMakeFiles/robot_hw_interface.dir/rule:
+	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_hw_interface.dir/rule
+.PHONY : robot_control/CMakeFiles/robot_hw_interface.dir/rule
 
 # Convenience name for target.
-robot_hw_interface_node: robot_control/CMakeFiles/robot_hw_interface_node.dir/rule
+robot_hw_interface: robot_control/CMakeFiles/robot_hw_interface.dir/rule
 
-.PHONY : robot_hw_interface_node
+.PHONY : robot_hw_interface
 
 # fast build rule for target.
-robot_hw_interface_node/fast:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_hw_interface_node.dir/build.make robot_control/CMakeFiles/robot_hw_interface_node.dir/build
-.PHONY : robot_hw_interface_node/fast
+robot_hw_interface/fast:
+	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_hw_interface.dir/build.make robot_control/CMakeFiles/robot_hw_interface.dir/build
+.PHONY : robot_hw_interface/fast
 
 # Convenience name for target.
 robot_control/CMakeFiles/robot_control_genpy.dir/rule:
@@ -683,7 +683,7 @@ src/robot_hw_interface.o: src/robot_hw_interface.cpp.o
 
 # target to build an object file
 src/robot_hw_interface.cpp.o:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_hw_interface_node.dir/build.make robot_control/CMakeFiles/robot_hw_interface_node.dir/src/robot_hw_interface.cpp.o
+	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_hw_interface.dir/build.make robot_control/CMakeFiles/robot_hw_interface.dir/src/robot_hw_interface.cpp.o
 .PHONY : src/robot_hw_interface.cpp.o
 
 src/robot_hw_interface.i: src/robot_hw_interface.cpp.i
@@ -692,7 +692,7 @@ src/robot_hw_interface.i: src/robot_hw_interface.cpp.i
 
 # target to preprocess a source file
 src/robot_hw_interface.cpp.i:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_hw_interface_node.dir/build.make robot_control/CMakeFiles/robot_hw_interface_node.dir/src/robot_hw_interface.cpp.i
+	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_hw_interface.dir/build.make robot_control/CMakeFiles/robot_hw_interface.dir/src/robot_hw_interface.cpp.i
 .PHONY : src/robot_hw_interface.cpp.i
 
 src/robot_hw_interface.s: src/robot_hw_interface.cpp.s
@@ -701,7 +701,7 @@ src/robot_hw_interface.s: src/robot_hw_interface.cpp.s
 
 # target to generate assembly for a file
 src/robot_hw_interface.cpp.s:
-	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_hw_interface_node.dir/build.make robot_control/CMakeFiles/robot_hw_interface_node.dir/src/robot_hw_interface.cpp.s
+	cd /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build && $(MAKE) -f robot_control/CMakeFiles/robot_hw_interface.dir/build.make robot_control/CMakeFiles/robot_hw_interface.dir/src/robot_hw_interface.cpp.s
 .PHONY : src/robot_hw_interface.cpp.s
 
 # Help Target
@@ -713,7 +713,7 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... edit_cache"
-	@echo "... robot_hw_interface_node"
+	@echo "... robot_hw_interface"
 	@echo "... robot_control_genpy"
 	@echo "... robot_control_generate_messages_py"
 	@echo "... robot_control_generate_messages_nodejs"

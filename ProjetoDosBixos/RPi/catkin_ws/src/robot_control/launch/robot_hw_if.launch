@@ -1,19 +1,20 @@
 <launch>
-   <!-- <arg name="model" default="$(find robot_description)/urdf/trekking2023.urdf.xacro"/> -->
-   <arg name="model" default="$(find robot_description)/urdf/V6.urdf"/>
+   <arg name="model" default="$(find robot_description)/urdf/urdf_1.urdf"/>
 
-    <node name="i2c_master" pkg="robot_control" type="i2c_master.py" /> 
+    <!-- <node name="i2c_master" pkg="robot_control" type="i2c_master.py" />  -->
 
     <!-- Load robot model-->
-    <param name="robot_description" command="cat $(find robot_description)/urdf/V6.urdf"/>
+    <param name="robot_description" command="cat $(find robot_description)/urdf/urdf_1.urdf"/>
+
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /> 
+
 
     <!-- Load controller settings -->
 	<rosparam file="$(find robot_control)/config/diff_drive_controller.yaml" command="load"/>
 
     <!-- Hardware interface -->
-    <node name="robot_hw_interface_node" pkg="robot_control" type="robot_hw_interface_node" output="screen"> 
+    <node name="robot_hw_interface" pkg="robot_control" type="robot_hw_interface" output="screen"> 
         <remap from="/mobile_base_controller/cmd_vel" to="/cmd_vel" />
 	</node>
 

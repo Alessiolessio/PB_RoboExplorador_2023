@@ -113,6 +113,9 @@ void task_motor_control() {
 
     while(1){
         pid_calculate(encoder_unit_left, pid_block_left, encoder_unit_right, pid_block_right);
+
+        // Testing:
+
         //update_motor(LEFT, 8192);
         //update_motor(RIGHT, 8192);
         //printf("Lidos: %d, %d\n", TARGET_VALUE_R, TARGET_VALUE_L);

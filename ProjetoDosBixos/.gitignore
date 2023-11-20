@@ -1,2 +1,9 @@
 .pio
 .vscode
+
+./devel
+./build
+
+build/
+devel/
+

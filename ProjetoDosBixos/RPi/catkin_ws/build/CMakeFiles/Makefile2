@@ -63,12 +63,12 @@ all: ros_controllers/position_controllers/all
 all: ros_controllers/imu_sensor_controller/all
 all: ros_controllers/joint_state_controller/all
 all: ros_controllers/gripper_action_controller/all
-all: robot_description/all
 all: ros_controllers/velocity_controllers/all
 all: ros_controllers/diff_drive_controller/all
 all: ros_controllers/ackermann_steering_controller/all
 all: ros_controllers/effort_controllers/all
 all: ros_controllers/joint_trajectory_controller/all
+all: robot_description/all
 all: ros_controllers/four_wheel_steering_controller/all
 
 .PHONY : all
@@ -84,12 +84,12 @@ preinstall: ros_controllers/position_controllers/preinstall
 preinstall: ros_controllers/imu_sensor_controller/preinstall
 preinstall: ros_controllers/joint_state_controller/preinstall
 preinstall: ros_controllers/gripper_action_controller/preinstall
-preinstall: robot_description/preinstall
 preinstall: ros_controllers/velocity_controllers/preinstall
 preinstall: ros_controllers/diff_drive_controller/preinstall
 preinstall: ros_controllers/ackermann_steering_controller/preinstall
 preinstall: ros_controllers/effort_controllers/preinstall
 preinstall: ros_controllers/joint_trajectory_controller/preinstall
+preinstall: robot_description/preinstall
 preinstall: ros_controllers/four_wheel_steering_controller/preinstall
 
 .PHONY : preinstall
@@ -110,12 +110,12 @@ clean: ros_controllers/position_controllers/clean
 clean: ros_controllers/imu_sensor_controller/clean
 clean: ros_controllers/joint_state_controller/clean
 clean: ros_controllers/gripper_action_controller/clean
-clean: robot_description/clean
 clean: ros_controllers/velocity_controllers/clean
 clean: ros_controllers/diff_drive_controller/clean
 clean: ros_controllers/ackermann_steering_controller/clean
 clean: ros_controllers/effort_controllers/clean
 clean: ros_controllers/joint_trajectory_controller/clean
+clean: robot_description/clean
 clean: ros_controllers/four_wheel_steering_controller/clean
 
 .PHONY : clean
@@ -181,7 +181,7 @@ gtest/googletest/clean: gtest/googletest/CMakeFiles/gtest.dir/clean
 # Directory level rules for directory robot_control
 
 # Recursive "all" directory target.
-robot_control/all: robot_control/CMakeFiles/robot_hw_interface_node.dir/all
+robot_control/all: robot_control/CMakeFiles/robot_hw_interface.dir/all
 robot_control/all: robot_control/CMakeFiles/robot_control_generate_messages.dir/all
 
 .PHONY : robot_control/all
@@ -192,7 +192,7 @@ robot_control/preinstall:
 .PHONY : robot_control/preinstall
 
 # Recursive "clean" directory target.
-robot_control/clean: robot_control/CMakeFiles/robot_hw_interface_node.dir/clean
+robot_control/clean: robot_control/CMakeFiles/robot_hw_interface.dir/clean
 robot_control/clean: robot_control/CMakeFiles/robot_control_genpy.dir/clean
 robot_control/clean: robot_control/CMakeFiles/robot_control_generate_messages_py.dir/clean
 robot_control/clean: robot_control/CMakeFiles/robot_control_generate_messages_nodejs.dir/clean
@@ -860,7 +860,6 @@ CMakeFiles/clean_test_results.dir/clean:
 # All Build rule for target.
 CMakeFiles/tests.dir/all: ros_controllers/joint_state_controller/CMakeFiles/joint_state_controller_test.dir/all
 CMakeFiles/tests.dir/all: ros_controllers/diff_drive_controller/CMakeFiles/diff_drive_multiple_cmd_vel_publishers_test.dir/all
-CMakeFiles/tests.dir/all: ros_controllers/joint_trajectory_controller/CMakeFiles/joint_trajectory_controller_vel_test.dir/all
 CMakeFiles/tests.dir/all: ros_controllers/diff_drive_controller/CMakeFiles/diff_drive_odom_frame_test.dir/all
 CMakeFiles/tests.dir/all: ros_controllers/diff_drive_controller/CMakeFiles/diff_drive_publish_wheel_joint_controller_state_test.dir/all
 CMakeFiles/tests.dir/all: ros_controllers/diff_drive_controller/CMakeFiles/diffbot.dir/all
@@ -888,6 +887,7 @@ CMakeFiles/tests.dir/all: ros_controllers/ackermann_steering_controller/CMakeFil
 CMakeFiles/tests.dir/all: ros_controllers/effort_controllers/CMakeFiles/simple_bot_hw.dir/all
 CMakeFiles/tests.dir/all: ros_controllers/effort_controllers/CMakeFiles/effort_position_controller_test.dir/all
 CMakeFiles/tests.dir/all: ros_controllers/joint_trajectory_controller/CMakeFiles/joint_trajectory_controller_wrapping_test.dir/all
+CMakeFiles/tests.dir/all: ros_controllers/joint_trajectory_controller/CMakeFiles/joint_trajectory_controller_vel_test.dir/all
 CMakeFiles/tests.dir/all: ros_controllers/joint_trajectory_controller/CMakeFiles/joint_trajectory_controller_test.dir/all
 CMakeFiles/tests.dir/all: ros_controllers/joint_trajectory_controller/CMakeFiles/joint_trajectory_controller_stopramp_test.dir/all
 CMakeFiles/tests.dir/all: ros_controllers/joint_trajectory_controller/CMakeFiles/tolerances_test.dir/all
@@ -1092,31 +1092,31 @@ ros_controllers/ros_controllers/CMakeFiles/_catkin_empty_exported_target.dir/cle
 .PHONY : ros_controllers/ros_controllers/CMakeFiles/_catkin_empty_exported_target.dir/clean
 
 #=============================================================================
-# Target rules for target robot_control/CMakeFiles/robot_hw_interface_node.dir
+# Target rules for target robot_control/CMakeFiles/robot_hw_interface.dir
 
 # All Build rule for target.
-robot_control/CMakeFiles/robot_hw_interface_node.dir/all:
-	$(MAKE) -f robot_control/CMakeFiles/robot_hw_interface_node.dir/build.make robot_control/CMakeFiles/robot_hw_interface_node.dir/depend
-	$(MAKE) -f robot_control/CMakeFiles/robot_hw_interface_node.dir/build.make robot_control/CMakeFiles/robot_hw_interface_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/CMakeFiles --progress-num=86 "Built target robot_hw_interface_node"
-.PHONY : robot_control/CMakeFiles/robot_hw_interface_node.dir/all
+robot_control/CMakeFiles/robot_hw_interface.dir/all:
+	$(MAKE) -f robot_control/CMakeFiles/robot_hw_interface.dir/build.make robot_control/CMakeFiles/robot_hw_interface.dir/depend
+	$(MAKE) -f robot_control/CMakeFiles/robot_hw_interface.dir/build.make robot_control/CMakeFiles/robot_hw_interface.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/CMakeFiles --progress-num=86 "Built target robot_hw_interface"
+.PHONY : robot_control/CMakeFiles/robot_hw_interface.dir/all
 
 # Build rule for subdir invocation for target.
-robot_control/CMakeFiles/robot_hw_interface_node.dir/rule: cmake_check_build_system
+robot_control/CMakeFiles/robot_hw_interface.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/CMakeFiles 1
-	$(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_hw_interface_node.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/robot_hw_interface.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/CMakeFiles 0
-.PHONY : robot_control/CMakeFiles/robot_hw_interface_node.dir/rule
+.PHONY : robot_control/CMakeFiles/robot_hw_interface.dir/rule
 
 # Convenience name for target.
-robot_hw_interface_node: robot_control/CMakeFiles/robot_hw_interface_node.dir/rule
+robot_hw_interface: robot_control/CMakeFiles/robot_hw_interface.dir/rule
 
-.PHONY : robot_hw_interface_node
+.PHONY : robot_hw_interface
 
 # clean rule for target.
-robot_control/CMakeFiles/robot_hw_interface_node.dir/clean:
-	$(MAKE) -f robot_control/CMakeFiles/robot_hw_interface_node.dir/build.make robot_control/CMakeFiles/robot_hw_interface_node.dir/clean
-.PHONY : robot_control/CMakeFiles/robot_hw_interface_node.dir/clean
+robot_control/CMakeFiles/robot_hw_interface.dir/clean:
+	$(MAKE) -f robot_control/CMakeFiles/robot_hw_interface.dir/build.make robot_control/CMakeFiles/robot_hw_interface.dir/clean
+.PHONY : robot_control/CMakeFiles/robot_hw_interface.dir/clean
 
 #=============================================================================
 # Target rules for target robot_control/CMakeFiles/robot_control_genpy.dir
@@ -3510,33 +3510,6 @@ dynamic_reconfigure_generate_messages_eus: ros_controllers/gripper_action_contro
 ros_controllers/gripper_action_controller/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/clean:
 	$(MAKE) -f ros_controllers/gripper_action_controller/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/build.make ros_controllers/gripper_action_controller/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/clean
 .PHONY : ros_controllers/gripper_action_controller/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/clean
-
-#=============================================================================
-# Target rules for target robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir
-
-# All Build rule for target.
-robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/all:
-	$(MAKE) -f robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/build.make robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/depend
-	$(MAKE) -f robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/build.make robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/CMakeFiles --progress-num= "Built target robot_description_xacro_generated_to_devel_space_"
-.PHONY : robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/all
-
-# Build rule for subdir invocation for target.
-robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/CMakeFiles 0
-.PHONY : robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/rule
-
-# Convenience name for target.
-robot_description_xacro_generated_to_devel_space_: robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/rule
-
-.PHONY : robot_description_xacro_generated_to_devel_space_
-
-# clean rule for target.
-robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/clean:
-	$(MAKE) -f robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/build.make robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/clean
-.PHONY : robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/clean
 
 #=============================================================================
 # Target rules for target ros_controllers/velocity_controllers/CMakeFiles/velocity_controllers.dir
@@ -9024,6 +8997,33 @@ hold_trajectory_builder_test: ros_controllers/joint_trajectory_controller/CMakeF
 ros_controllers/joint_trajectory_controller/CMakeFiles/hold_trajectory_builder_test.dir/clean:
 	$(MAKE) -f ros_controllers/joint_trajectory_controller/CMakeFiles/hold_trajectory_builder_test.dir/build.make ros_controllers/joint_trajectory_controller/CMakeFiles/hold_trajectory_builder_test.dir/clean
 .PHONY : ros_controllers/joint_trajectory_controller/CMakeFiles/hold_trajectory_builder_test.dir/clean
+
+#=============================================================================
+# Target rules for target robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir
+
+# All Build rule for target.
+robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/all:
+	$(MAKE) -f robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/build.make robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/depend
+	$(MAKE) -f robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/build.make robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/CMakeFiles --progress-num= "Built target robot_description_xacro_generated_to_devel_space_"
+.PHONY : robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/all
+
+# Build rule for subdir invocation for target.
+robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/math/Documentos/pb_2023/PB_2023/ProjetoDosBixos/RPi/catkin_ws/build/CMakeFiles 0
+.PHONY : robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/rule
+
+# Convenience name for target.
+robot_description_xacro_generated_to_devel_space_: robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/rule
+
+.PHONY : robot_description_xacro_generated_to_devel_space_
+
+# clean rule for target.
+robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/clean:
+	$(MAKE) -f robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/build.make robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/clean
+.PHONY : robot_description/CMakeFiles/robot_description_xacro_generated_to_devel_space_.dir/clean
 
 #=============================================================================
 # Target rules for target ros_controllers/four_wheel_steering_controller/CMakeFiles/four_wheel_steering_wrong_config_test.dir

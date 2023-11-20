@@ -55,17 +55,14 @@ class I2CCommunication:
 
     def write_data(self):
         try:
-
-            a = 22
-            b = 22
-
-            data = struct.pack('!ii', a, b)  # "Empacota" o valor mandado como parâmetro da função
+            data = struct.pack('!ii', self.right_wheel_velocity, self.left_wheel_velocity)  # "Empacota" o valor mandado como parâmetro da função
             self.i2c.write_i2c_block_data(self.device_address, REG_ADDRESS, list(data))  # Escreve valor para a ESP32
             
             rospy.loginfo(f'Valor enviado: {self.left_wheel_velocity}, {self.right_wheel_velocity}')
 
         except Exception as e:
-            rospy.logerr(f"Erro na escrita: {str(e)}")
+            #rospy.logerr(f"Erro na escrita: {str(e)}")
+            return None
 
     def joints_callback(self, msg):
 
@@ -86,7 +83,7 @@ class I2CCommunication:
 
         while not rospy.is_shutdown():
             self.read_data()
-            #self.write_data()
+            self.write_data()
 
             rate.sleep()
 
