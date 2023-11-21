@@ -1,5 +1,5 @@
 <launch>
-   <arg name="model" default="$(find robot_description)/urdf/urdf_1.urdf"/>
+   <!-- <arg name="model" default="$(find robot_description)/urdf/urdf_1.urdf"/> -->
 
     <!-- <node name="i2c_master" pkg="robot_control" type="i2c_master.py" />  -->
 
@@ -14,11 +14,9 @@
 	<rosparam file="$(find robot_control)/config/diff_drive_controller.yaml" command="load"/>
 
     <!-- Hardware interface -->
-    <node name="robot_hw_interface" pkg="robot_control" type="robot_hw_interface" output="screen"> 
-        <remap from="/mobile_base_controller/cmd_vel" to="/cmd_vel" />
-	</node>
+    <node name="robot_hw_interface" pkg="robot_control" type="robot_hw_interface" /> 
 
-    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
         args="
             /joints_update
             /mobile_base_controller">

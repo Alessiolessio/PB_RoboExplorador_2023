@@ -1,20 +1,17 @@
-#include <ros/ros.h>
-#include <hardware_interface/joint_state_interface.h>
-#include <hardware_interface/joint_command_interface.h>
-#include <controller_manager/controller_manager.h>
+#include "robot_hw_interface.hpp"
 
-#include "robot_control/encoder_data.h"
-#include "robot_control/velocity_data.h"
-
-#define ENCODER_RESOLUTION 2000
-
-class RobotHardwareInterface : public hardware_interface::RobotHW
+RobotHWInterface::RobotHWInterface(ros::NodeHandle &nh) : nh_(nh)
 {
-public:
-  RobotHardwareInterface() : nh_(), controller_manager_(this, nh_)
-  {
+    init();
+    controller_manager_.reset(new controller_manager::ControllerManager(this, nh_));
+    controller_manager_->update(ros::Time::now(), elapsed_time_);
+}
+
+void RobotHWInterface::init()
+{
+
     publisher_ = nh_.advertise<robot_control::velocity_data>("/velocity_command", 10);
-    subscriber_ = nh_.subscribe("/encoder_data", 10, &RobotHardwareInterface::velocityCommandCallback, this);
+    subscriber_ = nh_.subscribe("/encoder_data", 10, &RobotHWInterface::encoderCallback, this);
 
     // Inicializa as interfaces de estado e comando para as rodas direita e esquerda
     hardware_interface::JointStateHandle state_handle_right_wheel("wheel_right_joint", &pos[0], &vel[0], &eff[0]);
@@ -29,6 +26,9 @@ public:
     hardware_interface::JointHandle vel_handle_left_wheel(jnt_state_interface.getHandle("wheel_left_joint"), &cmd[1]);
     jnt_vel_interface.registerHandle(vel_handle_left_wheel);
 
+    registerInterface(&jnt_state_interface);
+    registerInterface(&jnt_vel_interface);
+
     pos[0] = 0;
     pos[1] = 0;
 
@@ -38,99 +38,78 @@ public:
     cmd[0] = 0;
     cmd[1] = 0;
 
-    registerInterface(&jnt_state_interface);
-    registerInterface(&jnt_vel_interface);
+    eff[0] = 0;
+    eff[1] = 0;
 
     current_real = ros::Time::now();
     last_real = ros::Time::now();
-  }
 
-  void read()
-  {
-    // Atualiza os estados das juntas (posição, velocidade, esforço)
+}
 
-    // Atualiza o tempo
-    current_real = ros::Time::now();
-    elapsed_time_ = current_real - last_real;
+void RobotHWInterface::read()
+{
+  // Atualiza os estados das juntas (posição, velocidade, esforço)
 
-    // Posição (radianos) = (Pulse count / Resolução) * 2 * PI
-    pos[0] += (right_encoder_data * 2 * 3.14159) / ENCODER_RESOLUTION;
-    pos[1] += (left_encoder_data * 2 * 3.14159) / ENCODER_RESOLUTION;
+  // Atualiza o tempo
+  current_real = ros::Time::now();
+  elapsed_time_ = current_real - last_real;
 
-    std::cout << "\n[POSICAO]" << std::endl;
-    std::cout << "Left: " << pos[0] << std::endl;
-    std::cout << "Right: " << pos[1] << std::endl;
+  // Posição (radianos) = (Pulse count / Resolução)
+  pos[0] += (right_encoder_data * elapsed_time_.toSec());
+  pos[1] += (left_encoder_data * elapsed_time_.toSec());
 
-    // Velocidade = Posição / Tempo
-    vel[0] = right_encoder_data / elapsed_time_.toSec();
-    vel[1] = left_encoder_data / elapsed_time_.toSec();
+  std::cout << "\nTime: " << elapsed_time_.toSec() << std::endl;
 
-    std::cout << "\n[VELOCIDADE]" << std::endl;
-    std::cout << "Left Vel.: " << vel[0] << std::endl;
-    std::cout << "Right Vel.: " << vel[1] << std::endl;
-  }
+  std::cout << "\n[POSICAO]" << std::endl;
+  std::cout << "Left: " << pos[0] << std::endl;
+  std::cout << "Right: " << pos[1] << std::endl;
 
-  void write()
-  {
-    // Envia comandos de controle para as juntas
+  // Velocidade = Posição / Tempo
+  vel[0] = right_encoder_data;
+  vel[1] = left_encoder_data;
 
-    // std::cout << "\n[COMMAND]" << std::endl;
-    // std::cout << "Left: " << cmd[0] << std::endl;
-    // std::cout << "Right: " << cmd[1] << std::endl;
+  std::cout << "\n[VELOCIDADE]" << std::endl;
+  std::cout << "Left Vel.: " << vel[0] << std::endl;
+  std::cout << "Right Vel.: " << vel[1] << std::endl;
+}
 
-    double right_wheel_command = cmd[0];
-    double left_wheel_command = cmd[1];
+void RobotHWInterface::write()
+{
+  // Envia comandos de controle para as juntas
 
-    robot_control::velocity_data velocity_msg;
+  // std::cout << "\n[COMMAND]" << std::endl;
+  // std::cout << "Left: " << cmd[0] << std::endl;
+  // std::cout << "Right: " << cmd[1] << std::endl;
 
-    velocity_msg.left_wheel_velocity = right_wheel_command;
-    velocity_msg.right_wheel_velocity = left_wheel_command;
+  double right_wheel_command = cmd[0];
+  double left_wheel_command = cmd[1];
 
-    publisher_.publish(velocity_msg);
+  robot_control::velocity_data velocity_msg;
 
-    last_real = ros::Time::now();
+  velocity_msg.left_wheel_velocity = right_wheel_command;
+  velocity_msg.right_wheel_velocity = left_wheel_command;
 
-    // Atualiza o controlador com o tempo atual e a diferença de tempo desde a última chamada
-    controller_manager_.update(ros::Time::now(), elapsed_time_);
-  }
+  publisher_.publish(velocity_msg);
 
-  void velocityCommandCallback(const robot_control::encoder_data::ConstPtr &msg)
-  {
-    // Callback chamado quando uma mensagem é recebida no tópico "velocity_command"
-    // Atualiza as variáveis necessárias com base nas informações recebidas
+  last_real = ros::Time::now();
 
-    left_encoder_data = msg->left_encoder_data; // Recebe o pulse count da roda esquerda
-    right_encoder_data = msg->right_encoder_data; // Recebe o pulse count da roda direita
-  }
+  // Atualiza o controlador com o tempo atual e a diferença de tempo desde a última chamada
+  controller_manager_->update(ros::Time::now(), elapsed_time_);
+}
 
-private:
-  hardware_interface::JointStateInterface jnt_state_interface;
-  hardware_interface::VelocityJointInterface jnt_vel_interface;
+void RobotHWInterface::encoderCallback(const robot_control::encoder_data::ConstPtr &msg)
+{
+  left_encoder_data = msg->left_encoder_data * K; // Recebe o pulse count da roda esquerda
+  right_encoder_data = msg->right_encoder_data * K; // Recebe o pulse count da roda direita
 
-  double pos[2];
-  double vel[2];
-  double eff[2];
-  double cmd[2];
-
-  double left_encoder_data = 0;
-  double right_encoder_data = 0;
-
-  ros::NodeHandle nh_;
-  ros::Publisher publisher_;
-  ros::Subscriber subscriber_;
-
-  ros::Time current_real;
-  ros::Time last_real;
-  ros::Duration elapsed_time_;
-
-  controller_manager::ControllerManager controller_manager_;
-};
+}
 
 int main(int argc, char **argv)
 {
   ros::init(argc, argv, "robot_hw_interface");
+  ros::NodeHandle nh;
 
-  RobotHardwareInterface robot_hw;
+  RobotHWInterface robot_hw(nh);
 
   ros::Rate rate(10);
   ros::AsyncSpinner spinner(4);
